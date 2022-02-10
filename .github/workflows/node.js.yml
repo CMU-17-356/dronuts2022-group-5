@@ -21,11 +21,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
+        cache-dependency-path: backend
+
+    - run: npm install
+      working-directory: backend
+
     - run: npm run build --if-present
+      working-directory: backend
+    - run: npm run lint
+      working-directory: backend
+    - run: npm run check
+      working-directory: backend
     - run: npm test
+      working-directory: backend
