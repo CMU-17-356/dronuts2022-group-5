@@ -160,5 +160,6 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,macos
 
 .idea
-.DS_Store
-.DS_Store
+
+backend/**/*.js
+
