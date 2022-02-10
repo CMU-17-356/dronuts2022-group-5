@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/CMU-17-356/dronuts2022-group-5#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1",
+    "mongoose-unique-validator": "^3.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
