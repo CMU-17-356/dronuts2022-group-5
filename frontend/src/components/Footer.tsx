@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
 
-export const footer: React.FC = () => {
+export const Footer: React.FC = () => {
     return (<>
         </>);
 }

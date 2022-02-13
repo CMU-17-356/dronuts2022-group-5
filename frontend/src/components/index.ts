@@ -1,2 +1,3 @@
-export * from './footer'
-export * from './sideBar'
+export * from './Footer'
+export * from './SideBar'
+export * from './NavBar'
