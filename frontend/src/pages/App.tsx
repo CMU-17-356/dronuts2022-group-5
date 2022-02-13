@@ -1,16 +1,19 @@
 import '../styles/App.css';
-import {Route, Routes} from 'react-router-dom'
-import {homepage} from "./homepage";
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Menu} from "./Menu";
+import {HomePage} from "./HomePage";
 import * as React from "react";
 
 export const App: React.FC = () => {
   return (
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={homepage}/>
-        <Route path="/home"element={homepage}/>
-        <Route path="/menu" element={homepage}/>
-        <Route path="/confirm" element={homepage}/>
-        <Route path="/shoppingcart" element={homepage}/>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/home" element={<HomePage />}/>
+        <Route path="/menu" element={<Menu />}/>
+        <Route path="/confirm" element={<HomePage />}/>
+        <Route path="/shoppingcart" element={<HomePage />}/>
       </Routes>
+    </BrowserRouter>
   );
 }
