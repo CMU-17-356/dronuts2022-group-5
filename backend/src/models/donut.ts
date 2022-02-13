@@ -11,7 +11,7 @@ const donutSchema: Schema = new Schema({
     availability: Boolean, 
     tags: [{
         type: Schema.Types.TagId,
-        ref: 'Customer'
+        ref: 'Tag'
     }],
 
 }, { timestamps: true});
