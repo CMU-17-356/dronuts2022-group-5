@@ -1,0 +1,41 @@
+.main-Div{
+    padding: 50px;
+}
+
+.menu-Title{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu-Div{
+    margin-bottom: 50px;
+}
+
+.options-Div{
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: black;
+    background-color: #F6F6F6;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    margin: auto;
+    height: auto;
+    text-align: center;
+    align-items: center;
+}
+
+.donuts-Card{
+    margin: 10px;
+}
+
+.donuts-Text{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.donuts-Img{
+    width: auto;
+    margin: auto;
+}
