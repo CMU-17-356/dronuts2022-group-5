@@ -6,7 +6,7 @@ export const HomePage: React.FC = () => {
     return (
         <>
         <NavBar/>
-        <div className={" w-full h-screen bg-center bg-cover bg-gradient-to-t"}
+        <div className={"grid grid-cols-1 w-full h-screen bg-center bg-cover bg-gradient-to-t"}
              style={{
                  backgroundImage: `linear-gradient(rgba(200, 200, 200, 0.9), rgba(200, 200, 200, 0.9)), url('image/donut_lead.jpeg')`
              }}>
