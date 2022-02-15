@@ -25,7 +25,7 @@ const pickupPointSchema = new mongoose.Schema({
 pickupPointSchema.methods.toJSON = function() {
     return {
         name: this.name,
-        latitude: this.latitude, 
+        latitude: this.latitude,
         longitude: this.longitude
     }
 }
