@@ -1,19 +1,29 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Document, Schema, Model } from 'mongoose';
+
+export interface CustomerInterface extends Document {
+    username: string,
+    password: string,
+    phoneNumber: number,
+    emailAddress: string,
+    paymentMethod: Schema.Types.ObjectId,
+    savedPickupPoints: Array<Schema.Types.ObjectId>,
+    pastOrders: Array<Schema.Types.ObjectId>,
+}
 
 const customerSchema: Schema = new Schema({
-    UserName: String,
-    Password: String,
-    PhoneNumber: Number,
-    EmailAddress: String,
-    PaymentMethod: [{
+    username: String,
+    password: String,
+    phoneNumber: Number,
+    emailAddress: String,
+    paymentMethod: {
         type: Schema.Types.ObjectId,
         ref: 'PaymentMethod'
-    }],
-    SavedPickupPoint: [{
+    },
+    savedPickupPoint: [{
         type: Schema.Types.ObjectId,
         ref: 'PickupPoint'
     }],
-    PastOrders: [{
+    pastOrders: [{
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
@@ -22,11 +32,11 @@ const customerSchema: Schema = new Schema({
 
 customerSchema.methods.toJSON = function () {
     return {
-        UserName: this.UserName,
-        Password: this.Password,
-        PhoneNumber: this.PhoneNumber,
-        EmailAddress: this.EmailAddress,
+        userName: this.userName,
+        password: this.password,
+        phoneNumber: this.phoneNumber,
+        emailAddress: this.emailAddress,
     }
 }
 
-export default mongoose.model('Customer', customerSchema);
+export const CustomerModel: Model<CustomerInterface> = mongoose.model('Customer', customerSchema);
