@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
 import {DonutCard} from "../components/DonutCard";
+import {NavBar} from "../components/NavBar";
 import "../styles/Menu.css";
 
 class Donut {
@@ -30,6 +31,7 @@ const items: Array<Donut> = [
 
 export const Menu: React.FC = () => {
     return (<>
+        <NavBar/>
         <div className="main-Div">
 
             <div className="menu-Div">
