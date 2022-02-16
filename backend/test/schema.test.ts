@@ -145,7 +145,7 @@ describe('schema tests', function () {
     });
 
     const PICKUP_NAME = "Test Location";
-    const LATITUDE = 40.443483;
+    const LATITUDE = 77.443483;
     const LONGITUDE = -79.944549;
     // Pickup Point tests
     it('pickup point schema', () => {
@@ -157,6 +157,23 @@ describe('schema tests', function () {
         expect(m.latitude).toEqual(LATITUDE);
         expect(m.longitude).toEqual(LONGITUDE);
     })
+
+    it('pickup point db', async () => {
+        const m: PickupPointInterface = new PickupPointModel();
+        m.name = PICKUP_NAME;
+        m.latitude = LATITUDE;
+        m.longitude = LONGITUDE;
+        await m.save();
+        const mDb: PickupPointInterface | null = await PickupPointModel.findOne({
+            name: PICKUP_NAME
+        }).exec();
+        expect(mDb).toBeDefined();
+        if (mDb) {
+            expect(m.name).toEqual(PICKUP_NAME);
+            expect(m.latitude).toEqual(LATITUDE);
+            expect(m.longitude).toEqual(LONGITUDE);
+        }
+    });
 
     const TAGNAME = "Gluten Free";
     // Tag tests
