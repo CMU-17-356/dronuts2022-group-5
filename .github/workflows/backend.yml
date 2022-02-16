@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [17.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache-dependency-path: backend
 
-    - run: npm install
+    - run: npm install -f
       working-directory: backend
 
     - run: npm run build --if-present
