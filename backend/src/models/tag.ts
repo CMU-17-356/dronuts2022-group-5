@@ -10,7 +10,7 @@ const tagSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    donut: [{
+    donuts: [{
         type: Schema.Types.ObjectId,
         ref: 'Donut'
     }]

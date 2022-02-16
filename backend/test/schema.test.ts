@@ -3,6 +3,7 @@ import * as testDB from './utility';
 import { CustomerInterface, CustomerModel } from '../src/models/customer';
 import { DroneInterface, DroneModel } from '../src/models/drone';
 import { EmployeeInterface, EmployeeModel } from '../src/models/employee';
+import { TagInterface, TagModel } from '../src/models/tag';
 
 beforeAll(async () => {
     await testDB.connect();
@@ -97,5 +98,11 @@ describe('schema tests', function () {
 
     // Pickup Point tests
 
+    const TAGNAME = "Gluten Free";
     // Tag tests
+    it('tag schema', () => {
+        const m: TagInterface = new TagModel();
+        m.name = TAGNAME;
+        expect(m.name).toEqual(TAGNAME);
+    })
 });
