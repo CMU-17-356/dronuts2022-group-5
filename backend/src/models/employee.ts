@@ -36,8 +36,4 @@ EmployeeSchema.methods.toJSON = function () {
     }
 }
 
-<<<<<<< HEAD
-export default mongoose.model('Customer', EmployeeSchema);
-=======
 export const EmployeeModel: Model<EmployeeInterface> = mongoose.model('Employee', EmployeeSchema);
->>>>>>> WIP
