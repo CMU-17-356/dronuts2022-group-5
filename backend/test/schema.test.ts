@@ -4,7 +4,8 @@ import { CustomerInterface, CustomerModel } from '../src/models/customer';
 import { DroneInterface, DroneModel } from '../src/models/drone';
 import { EmployeeInterface, EmployeeModel } from '../src/models/employee';
 import { TagInterface, TagModel } from '../src/models/tag';
-import {OrderInterface, OrderModel} from "../src/models/order";
+import { OrderInterface, OrderModel } from "../src/models/order";
+import { PickupPointInterface, PickupPointModel } from "../src/models/pickup_point";
 
 
 beforeAll(async () => {
@@ -142,7 +143,20 @@ describe('schema tests', function () {
             expect(mDb.rating).toEqual(0.5);
         }
     });
+
+    const PICKUP_NAME = "Test Location";
+    const LATITUDE = 40.443483;
+    const LONGITUDE = -79.944549;
     // Pickup Point tests
+    it('pickup point schema', () => {
+        const m: PickupPointInterface = new PickupPointModel();
+        m.name = PICKUP_NAME;
+        m.latitude = LATITUDE;
+        m.longitude = LONGITUDE;
+        expect(m.name).toEqual(PICKUP_NAME);
+        expect(m.latitude).toEqual(LATITUDE);
+        expect(m.longitude).toEqual(LONGITUDE);
+    })
 
     const TAGNAME = "Gluten Free";
     // Tag tests
