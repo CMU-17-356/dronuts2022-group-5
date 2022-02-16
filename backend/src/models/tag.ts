@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model } from 'mongoose'
 
 export interface TagInterface extends Document {
     name: string
-    donut: Array<Schema.Types.ObjectId>
+    donuts: Array<Schema.Types.ObjectId>
 }
 
 const tagSchema = new mongoose.Schema({

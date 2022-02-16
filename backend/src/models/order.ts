@@ -20,8 +20,8 @@ const orderSchema: Schema = new Schema({
     }],
     status: {
         type: String,
-        enum: ['NEW', 'IN-DELIVERY', 'COMPLETED'],
-        default: 'NEW'
+        enum: ['IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
+        default: 'IN-PROGRESS'
     }, 
     additionalCost: Number, // Includes tax, fees, delivery charge
     totalCost: Number,
