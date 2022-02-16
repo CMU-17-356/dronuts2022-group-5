@@ -1,17 +1,31 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
-
-export interface EmployeeInterface extends Document {
-    name: string
-    password: string
-    phoneNumber: number
-    emailAddress: string
-}
+import mongoose, {Schema} from 'mongoose';
 
 const EmployeeSchema: Schema = new Schema({
-    name: String,
-    password: String,
-    phoneNumber: Number,
-    emailAddress: String,
+    Name: {
+        type: String,
+        required: [true, 'EmplyeeName is required']
+    },
+
+    Password: {
+        type: String,
+        minLength: [8, 'Password is too short, less than 8'],
+        maxLength: [256, 'Password is too long'],
+        required: [true, 'Password is required']
+    },
+    PhoneNumber: {
+        type: Number,
+        min: 1000000000,
+        max: 9999999999,
+    },
+
+    EmailAddress: {
+        type: String,
+        validate: {
+            validator: () => Promise.resolve(false),
+            message: 'Email validation failed'
+        }
+    }
+
 }, {timestamps: true});
 
 EmployeeSchema.methods.toJSON = function () {
@@ -23,4 +37,4 @@ EmployeeSchema.methods.toJSON = function () {
     }
 }
 
-export const EmployeeModel: Model<EmployeeInterface> = mongoose.model('Customer', EmployeeSchema);
+export default mongoose.model('Customer', EmployeeSchema);

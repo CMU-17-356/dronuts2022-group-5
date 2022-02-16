@@ -11,10 +11,29 @@ export interface CustomerInterface extends Document {
 }
 
 const customerSchema: Schema = new Schema({
-    username: String,
-    password: String,
-    phoneNumber: Number,
-    emailAddress: String,
+    username: {
+        type:String,
+        required: true
+    },
+
+    password: {
+        type:String,
+        required: true,
+        minLength: [8, "the password requires at least 8 characters"]
+    },
+
+    phoneNumber: {
+        type:Number,
+        min: 1000000000,
+        max: 9999999999,
+    },
+
+    emailAddress: {
+        typ:String,
+        validator: function(e:string) {
+            return (new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)).test(e);
+        },
+    },
     paymentMethod: {
         type: Schema.Types.ObjectId,
         ref: 'PaymentMethod'

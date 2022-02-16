@@ -12,13 +12,36 @@ export interface DonutInterface extends Document {
 }
 
 const donutSchema: Schema = new Schema({
-    name: String,
-    price: Number,
-    weight: Number,
-    discount: Number,
-    picture: String,
-    description: String,
-    availability: Boolean, 
+    name: {
+        type: String,
+        required:true
+    },
+    price: {
+        type:Number,
+        min: 0.01,
+        max: 50
+    },
+    weight: {
+        type:Number,
+        min: 0,
+        max: 1000
+    },
+    discount: {
+        type: Number,
+        min: 0,
+        max: 1.0
+    },
+    picture: {
+        type: String
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    availability: {
+        type: Boolean,
+        required: false
+    },
     tags: [{
         type: Schema.Types.ObjectId,
         ref: 'Tag'
