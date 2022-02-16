@@ -29,10 +29,12 @@ const customerSchema: Schema = new Schema({
     },
 
     emailAddress: {
-        typ:String,
-        validator: function(e:string) {
-            return (new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)).test(e);
-        },
+        type:String,
+        validate: {
+            validator: function (e: string) {
+                return (new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)).test(e);
+            },
+        }
     },
     paymentMethod: {
         type: Schema.Types.ObjectId,
