@@ -1,4 +1,15 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Document, Schema, Model } from 'mongoose';
+
+export interface DonutInterface extends Document {
+    name: string
+    price: number
+    weight: number
+    discount: number
+    picture: string
+    description: string
+    availability: boolean
+    tags: Array<Schema.Types.ObjectId>
+}
 
 const donutSchema: Schema = new Schema({
     name: String,
@@ -28,4 +39,4 @@ donutSchema.methods.toJSON = function() {
     }
 }
 
-export default mongoose.model('Donut', donutSchema);
+export const DonutModel: Model<DonutInterface> = mongoose.model('Donut', donutSchema)

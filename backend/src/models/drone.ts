@@ -8,7 +8,6 @@ const droneSchema = new mongoose.Schema({
     availability: {
         type: Boolean,
         required: true
-
     }
 })
 
