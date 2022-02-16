@@ -4,7 +4,9 @@ export interface OrderInterface extends Document {
     customer: Schema.Types.ObjectId
     donuts: Array<Schema.Types.ObjectId>
     status: string
-    additionalCost: number
+    tax: number
+    serviceFee: number
+    deliveryFee: number
     totalCost: number
     rating: number
 }
@@ -23,7 +25,9 @@ const orderSchema: Schema = new Schema({
         enum: ['IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
         default: 'IN-PROGRESS'
     }, 
-    additionalCost: Number, // Includes tax, fees, delivery charge
+    tax: Number,
+    serviceFee: Number,
+    deliveryFee: Number, 
     totalCost: Number,
     rating: Number,
 }, { timestamps: true});
@@ -33,7 +37,9 @@ orderSchema.methods.toJSON = function() {
         // customer: this.customer.toJSON(),
         // donuts: this.donuts.map()
         status: this.status,
-        additionalCost: this.additionalCost,
+        tax: this.tax,
+        serviceFee: this.serviceFee,
+        deliveryFee: this.deliveryFee,
         totalCost: this.totalCost,
         rating: this.rating,
         createdAt: this.createdAt,
