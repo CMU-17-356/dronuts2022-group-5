@@ -88,7 +88,7 @@ describe('schema tests', function () {
 
     // Drone tests
     it('drone schema', () => {
-        const m = new DroneModel();
+        const m: DroneInterface = new DroneModel();
         m.availability = true;
         expect(m.availability).toEqual(true);
     })
