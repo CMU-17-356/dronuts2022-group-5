@@ -1,4 +1,13 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Document, Schema, Model } from 'mongoose';
+
+export interface OrderInterface extends Document {
+    customer: Schema.Types.ObjectId
+    donuts: Array<Schema.Types.ObjectId>
+    status: string
+    additionalCost: number
+    totalCost: number
+    rating: number
+}
 
 const orderSchema: Schema = new Schema({
     customer: {
@@ -32,4 +41,4 @@ orderSchema.methods.toJSON = function() {
     }
 }
 
-export default mongoose.model('Order', orderSchema);
+export const OrderModel: Model<OrderInterface> = mongoose.model('Order', orderSchema);

@@ -1,13 +1,13 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
 export interface CustomerInterface extends Document {
-    username: string,
-    password: string,
-    phoneNumber: number,
-    emailAddress: string,
-    paymentMethod: Schema.Types.ObjectId,
-    savedPickupPoints: Array<Schema.Types.ObjectId>,
-    pastOrders: Array<Schema.Types.ObjectId>,
+    username: string
+    password: string
+    phoneNumber: number
+    emailAddress: string
+    paymentMethod: Schema.Types.ObjectId
+    savedPickupPoints: Array<Schema.Types.ObjectId>
+    pastOrders: Array<Schema.Types.ObjectId>
 }
 
 const customerSchema: Schema = new Schema({
