@@ -5,7 +5,6 @@ import { DroneInterface, DroneModel } from '../src/models/drone';
 import { EmployeeInterface, EmployeeModel } from '../src/models/employee';
 import { TagInterface, TagModel } from '../src/models/tag';
 import {OrderInterface, OrderModel} from "../src/models/order";
-import {Schema} from "mongoose";
 
 
 beforeAll(async () => {
