@@ -127,7 +127,7 @@ describe('schema tests', function () {
         const m: OrderInterface = new OrderModel();
         m.customer = c._id;
         m.donuts = [];
-        m.status = 'NEW';
+        m.status = 'IN-PROGRESS';
         m.totalCost = 24;
         m.rating = 0.5;
         await m.save();
@@ -138,7 +138,7 @@ describe('schema tests', function () {
         if (mDb) {
             expect(mDb.customer).toEqual(c._id);
             expect(mDb.donuts).toEqual([]);
-            expect(mDb.status).toEqual('NEW');
+            expect(mDb.status).toEqual('IN-PROGRESS');
             expect(mDb.totalCost).toEqual(24);
             expect(mDb.rating).toEqual(0.5);
         }
