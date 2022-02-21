@@ -34,8 +34,9 @@ const orderSchema: Schema = new Schema({
 
 orderSchema.methods.toJSON = function() {
     return {
-        // customer: this.customer.toJSON(),
-        // donuts: this.donuts.map()
+        id: this._id,
+        customer: this.customer,
+        donuts: this.donuts,
         status: this.status,
         tax: this.tax,
         serviceFee: this.serviceFee,
