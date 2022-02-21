@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { CustomerModel } from './models/customer';
+import { DonutModel } from './models/donut';
 import { OrderModel } from './models/order';
 
 const app = express();
@@ -17,25 +18,37 @@ app.get('/', (req, res) => {
 
 // Temporary way of adding orders
 app.get('/test', (req, res) => {
+  const donut = new DonutModel({name: 'testdonut'});
+  donut.save(err => {
+    if (err) res.sendStatus(500);
+  })
   const customer = new CustomerModel({username: 'testcustomer', password: 'testpassword'});
   customer.save(err => {
-    if (err) res.send('error');
+    if (err) res.sendStatus(500);
   });
-  const order = new OrderModel({customer: customer, tax: 1});
+  const order = new OrderModel({customer: customer, donuts: [donut], tax: 1});
   order.save(err => {
-    if (err) res.send('error');
+    if (err) res.sendStatus(500);
   });
   res.send('success');
 })
 
 app.get('/employee/orders', (req, res) => {
-  // Return details of all orders that are not yet completed
-  OrderModel.find().where('status').ne('COMPLETED').exec((err, orders) => {
-    if (err) res.send('error');
-    else {
-      res.send(orders.map(x => x.toJSON()));
-    }
-  });
+  const orderId = req.query.orderId;
+
+  if (!orderId) {
+    // Return details of all orders that are not yet completed
+    OrderModel.find().where('status').ne('COMPLETED').exec((err, orders) => {
+      if (err) res.sendStatus(404);
+      res.send(orders);
+    });
+  } else {
+    // Specific order
+    OrderModel.findOne().where('_id').equals(orderId).exec((err, order) => {
+      if (err) res.sendStatus(404);
+      res.send(order);
+    })
+  }
 });
 
 app.post('/employee/confirm', (req, res) => {
