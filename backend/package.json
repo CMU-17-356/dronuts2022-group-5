@@ -24,6 +24,7 @@
   "dependencies": {
     "express": "^4.17.3",
     "mongoose": "^6.2.3",
+    "cors": "^2.8.5",
     "mongoose-unique-validator": "^3.0.0",
     "pkg": "^5.5.2"
   },
