@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import menuJson from './menu.json';
 import { DonutModel } from '../src/models/donut';
+import config from '../config.json';
 
 (async () => {
     console.log('connecting to db');
-    await mongoose.connect('mongodb://127.0.0.1/db');
+    await mongoose.connect(config.db);
     const db = mongoose.connection;
     console.log('connected to db');
 
