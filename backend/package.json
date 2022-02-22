@@ -5,7 +5,7 @@
   "main": "src/hello_world.ts",
   "scripts": {
     "start": "node src/hello_world.js",
-    "build": "tsc --project ./",
+    "build": "find src scripts test -name \"*.js\" -type f -delete && tsc --project ./",
     "lint": "eslint src/**/*.ts test/**/*.ts",
     "test": "jest",
     "check": "npm-check --skip-unused"

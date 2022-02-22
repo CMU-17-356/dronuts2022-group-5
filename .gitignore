@@ -162,4 +162,5 @@ dist
 .idea
 
 backend/src/**/*.js
+backend/scripts/**/*.js
 backend/test/**/*.js
