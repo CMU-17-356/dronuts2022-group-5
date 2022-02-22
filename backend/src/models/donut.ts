@@ -51,6 +51,7 @@ const donutSchema: Schema = new Schema({
 
 donutSchema.methods.toJSON = function() {
     return {
+        id: this._id,
         name: this.name,
         price: this.price,
         weight: this.weight,
@@ -58,7 +59,7 @@ donutSchema.methods.toJSON = function() {
         picture: this.picture,
         description: this.description,
         availability: this.availability, 
-        // tag: this.tag.map()
+        tags: this.tags
     }
 }
 

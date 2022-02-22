@@ -5,8 +5,9 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "node src/app.js",
-    "build": "find src scripts test -name \"*.js\" -type f -delete && tsc --project ./",
-    "lint": "eslint src/**/*.ts test/**/*.ts",
+    "clean": "find src scripts test -name \"*.js\" -type f -delete",
+    "build": "tsc --project ./",
+    "lint": "eslint src/**/*.ts test/**/*.ts scripts/**/*.ts",
     "test": "jest",
     "check": "npm-check --skip-unused"
   },
