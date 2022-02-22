@@ -12,4 +12,12 @@ customerRouter.get('/menu', function(req, res, next){
     }
     )
 
+customerRouter.post('/confirm', function(req,res, next){
+    Customer.findById(req.body.id)
+})
+
+customerRouter.post('/order', function(req, res, next){
+
+})
+
 export default customerRouter
