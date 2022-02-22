@@ -107,12 +107,14 @@ describe('schema tests', function () {
         const m = new OrderModel();
         m.customer = c._id;
         m.donuts = [];
+        m.amounts = [];
         m.status = 'NEW';
         m.totalCost = 24;
         m.rating = 0.5;
 
         expect(m.customer).toEqual(c._id);
         expect(m.donuts).toEqual([]);
+        expect(m.amounts).toEqual([]);
         expect(m.status).toEqual('NEW');
         expect(m.totalCost).toEqual(24);
         expect(m.rating).toEqual(0.5);

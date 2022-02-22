@@ -21,6 +21,7 @@ const orderSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Donut'
     }],
+    amounts: [Number],
     status: {
         type: String,
         enum: ['IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
@@ -38,6 +39,7 @@ orderSchema.methods.toJSON = function() {
         id: this._id,
         customer: this.customer,
         donuts: this.donuts,
+        amounts: this.amounts,
         status: this.status,
         tax: this.tax,
         serviceFee: this.serviceFee,
