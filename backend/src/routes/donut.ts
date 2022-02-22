@@ -1,10 +1,9 @@
 import express, { Request, Response } from 'express';
-
 import { DonutModel } from '../models/donut';
 
-const router = express.Router();
+const donutRouter = express.Router();
 
-router.get('/donuts', [], async (req: Request, res: Response) => {
+donutRouter.get('/donuts', [], async (req: Request, res: Response) => {
     const donutId = req.query.donutId;
     try {
         if (!donutId) {
@@ -23,4 +22,4 @@ router.get('/donuts', [], async (req: Request, res: Response) => {
     }
 });
 
-export { router as donutRouter }
+export default donutRouter

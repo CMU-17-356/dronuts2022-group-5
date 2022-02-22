@@ -19,8 +19,7 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CMU-17-356/dronuts2022-group-5/issues"
-  },
-  "homepage": "https://github.com/CMU-17-356/dronuts2022-group-5#readme",
+  }, "homepage": "https://github.com/CMU-17-356/dronuts2022-group-5#readme",
   "dependencies": {
     "express": "^4.17.3",
     "mongoose": "^6.2.3",
