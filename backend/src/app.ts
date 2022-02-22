@@ -2,13 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import config from '../config.json';
-import { donutRouter } from './routes/donut';
-import { employeeRouter } from './routes/employee';
+import router from "./routes";
+
 
 const app = express();
-
-app.use(employeeRouter);
-app.use(donutRouter)
+app.use(router);
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname + '/public'));
 
 mongoose.connect(config.db, () => {
     console.log('connected to database');
