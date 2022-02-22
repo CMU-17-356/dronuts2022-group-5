@@ -19,13 +19,11 @@ router.get('/employee/test', [], async (req: Request, res: Response) => {
         res.status(500).send(err);
         return;
     }
-
     res.send('success');
 });
 
 router.get('/employee/orders', [], async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
-
     try {
         if (!orderId) {
             // Return details of all orders that are not yet completed
@@ -43,8 +41,26 @@ router.get('/employee/orders', [], async (req: Request, res: Response) => {
     }
 });
 
-router.post('/employee/confirm', (req: Request, res: Response) => {
-    res.send('TODO');
+router.post('/employee/confirm', async (req: Request, res: Response) => {
+    const orderId = req.query.orderId;
+    if (!orderId) {
+        // Missing orderId
+        res.sendStatus(400);
+        return;
+    }
+
+    try {
+        // TODO: Drone API call here
+        // Change existing order to IN-DELIVERY
+        const order = await OrderModel.findOneAndUpdate(
+            {_id: orderId},
+            {status: 'IN-DELIVERY'}
+        );
+        res.send(order);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
 });
 
 export { router as employeeRouter }

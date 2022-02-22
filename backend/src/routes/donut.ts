@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/donuts', [], async (req: Request, res: Response) => {
     const donutId = req.query.donutId;
-
     try {
         if (!donutId) {
             // Return details of all donuts
