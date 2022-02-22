@@ -1,0 +1,34 @@
+{
+    "Menu": [
+        {
+            "name": "Apple Krumb",
+            "price": 1.99,
+            "weight": 5,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg",
+            "description": "Like Apple Crumble Pie!",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Bavarian Creme",
+            "price": 2.99,
+            "weight": 6,
+            "discount": 0.1,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg",
+            "description": "Bavarian Creme donut",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Apple Krumb",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/blueberry.jpg",
+            "description": "Blueberry donut",
+            "availability": false,
+            "tags": []
+        }
+    ]
+}
