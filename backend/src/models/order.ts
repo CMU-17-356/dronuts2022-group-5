@@ -3,6 +3,7 @@ import mongoose, { Document, Schema, Model } from 'mongoose';
 export interface OrderInterface extends Document {
     customer: Schema.Types.ObjectId
     donuts: Array<Schema.Types.ObjectId>
+    amounts: Array<number>
     status: string
     tax: number
     serviceFee: number
