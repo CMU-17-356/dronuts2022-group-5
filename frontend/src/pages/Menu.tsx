@@ -6,26 +6,28 @@ import "../styles/Menu.css";
 class Donut {
     name: string
     image: string
+    description: string
+    price: number
+    quantity: number
 
-    constructor(name: string, image: string) {
+    constructor(name: string, image: string, description: string, price: number, quantity: number) {
         this.name = name;
         this.image = image;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
     }
 }
 
 // Temporary Menu
 const items: Array<Donut> = [
-    new Donut("Apple Krumb", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Bavarian", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/bavarian_kreme.jpg"),
-    new Donut("Cruller", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/cruller.jpg"),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 2),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
+    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
 ]
 
 export const Menu: React.FC = () => {
@@ -37,7 +39,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
                     {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} />
+                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
@@ -46,7 +48,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Freshly Baked</h1>
                 <div className="options-Div">
                     {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} />
+                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
@@ -55,7 +57,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
                     {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} />
+                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
