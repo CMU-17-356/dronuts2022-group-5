@@ -4,9 +4,6 @@ import {CustomerModel} from "../models/customer";
 import {OrderInterface, OrderModel,} from "../models/order";
 
 const customerRouter = Router();
-const Donut = mongoose.model('donut');
-const Customer = mongoose.model('customer')
-const Order = mongoose.model('order')
 
 customerRouter.get('/profile', function (req, res) {
         const custId = req.query.custId;
@@ -14,8 +11,8 @@ customerRouter.get('/profile', function (req, res) {
             if (!custId) {
                 res.sendStatus(500)
             }
-            CustomerModel.findById(custId)
-            res.send(Customer);
+            const custRes = CustomerModel.findById(custId)
+            res.send(custRes);
         } catch (err) {
             console.log(err);
             res.status(500).send(err);
@@ -26,7 +23,7 @@ customerRouter.get('/profile', function (req, res) {
 
 customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
     try {
-        const customer = Customer.findById(req.query.custId);
+        const customer = CustomerModel.findById(req.query.custId);
         if (customer == null) {
             res.status(500).send("no customer found");
         }
@@ -42,7 +39,7 @@ customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
 
 customerRouter.post('/order', function (req, res, next) {
     try {
-        const customer = Customer.findById(req.query.custId);
+        const customer = CustomerModel.findById(req.query.custId);
         const orderData: OrderInterface = JSON.parse(req.body);
         if (customer == null) {
             res.status(500).send("no customer found");
