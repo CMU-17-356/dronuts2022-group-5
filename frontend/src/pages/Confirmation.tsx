@@ -4,21 +4,6 @@ import {ListItem} from "../components/ListItem";
 import {ListInfo} from "../components/ListInfo";
 import "../styles/Confirmation.css";
 
-class Donut {
-    name: string
-    image: string
-
-    constructor(name: string, image: string) {
-        this.name = name;
-        this.image = image;
-    }
-}
-
-// Temporary Menu
-const items: Array<Donut> = [
-    new Donut("Apple Krumb", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg"),
-]
-
 export const Confirmation: React.FC = () => {
     return (<>
         <NavBar/>
