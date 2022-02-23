@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.26.0",
     "package.json": "^2.0.1",
     "pkg": "^5.5.2",
     "react": "^17.0.2",
