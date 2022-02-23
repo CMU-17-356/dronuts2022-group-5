@@ -28,7 +28,7 @@ customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
     try {
         const customer = Customer.findById(req.query.custId);
         if (customer == null) {
-            res.status(500).send("no customer found");;
+            res.status(500).send("no customer found");
         }
         const orderData: OrderInterface = JSON.parse(req.body);
         const orderStore = new OrderModel(orderData);
