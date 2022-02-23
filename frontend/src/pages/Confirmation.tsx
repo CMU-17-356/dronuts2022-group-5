@@ -3,8 +3,24 @@ import {NavBar} from "../components/NavBar";
 import {ListItem} from "../components/ListItem";
 import {ListInfo} from "../components/ListInfo";
 import "../styles/Confirmation.css";
+import {useEffect} from "react";
+import {getRequest, postRequest} from "../utils/requests";
+import {OrderInterface} from "../types/api";
 
 export const Confirmation: React.FC = () => {
+
+    //TODO sample for connect back and front end
+    const order = null;
+    async function submitOrder() {
+        try {
+            const res = await postRequest<OrderInterface>(order,"order?custId="+"custId", null);
+            if (res.status === 200) {
+                console.log("success")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (<>
         <NavBar/>
         <div className="main-Confirmation-Div">
