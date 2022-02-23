@@ -1,0 +1,111 @@
+.main-Confirmation-Div{
+    background-color: white;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(2, auto);
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+.confirmation-Div{
+    grid-column: 2 / span 4;
+    grid-row: 1;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.payment-Div{
+    grid-column: 2 / span 4;
+    grid-row: 2;
+    margin: auto;
+    width: 100%;
+}
+
+.contact-Div{
+    grid-column: 7 / span 4;
+    grid-row: 1;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.list-Info{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: 20px;
+}
+
+.list-Content{
+    width: 100%;
+    border-width: 1px;
+    border-color: black;
+}
+
+.button-Div{
+    grid-column: 7 / span 4;
+    grid-row: 2;
+    height: 250px;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 20%, 20%, 20%;
+}
+
+.checkout-Button{
+    background-color: green;
+    height: 50px;
+    border-radius: 10px;
+    width: 75%;
+    font-weight: bold;
+    color: white;
+    margin: auto;
+}
+
+.agreement-button-div{
+    display: grid;
+    grid-template-columns: 2;
+}
+
+.list-Items{
+    border-color: black;
+    border-width: 1px;
+    height: 250px;
+    padding: 30px;
+    padding-top: 20px;
+}
+
+.list-Item{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    border-color: black;
+    border-top-width: 1px;
+}
+
+.div-Text{
+    margin-right: auto;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: left;
+}
+
+.button-Div-H1{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.button-Div-Input{
+    grid-column: 2;
+    margin: auto;
+}
+
+.agreement-H1{
+}
