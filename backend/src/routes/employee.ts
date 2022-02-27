@@ -6,7 +6,7 @@ import { OrderModel } from '../models/order';
 
 const router = express.Router();
 
-router.get('/employee/test', [], async (req: Request, res: Response) => {
+router.get('/test', [], async (req: Request, res: Response) => {
     // Temporary way of adding orders
     try {
         const donut = await DonutModel.findOne();
@@ -22,7 +22,7 @@ router.get('/employee/test', [], async (req: Request, res: Response) => {
     res.send('success');
 });
 
-router.get('/employee/orders', [], async (req: Request, res: Response) => {
+router.get('/orders', [], async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
     try {
         if (!orderId) {
@@ -41,7 +41,7 @@ router.get('/employee/orders', [], async (req: Request, res: Response) => {
     }
 });
 
-router.post('/employee/confirm', async (req: Request, res: Response) => {
+router.post('/confirm', async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
     if (!orderId) {
         // Missing orderId

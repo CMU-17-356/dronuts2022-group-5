@@ -1,60 +1,84 @@
 import {Request, Response, Router} from "express";
-import mongoose from "mongoose";
-import {CustomerModel} from "../models/customer";
+
+import {CustomerInterface, CustomerModel} from "../models/customer";
 import {OrderInterface, OrderModel,} from "../models/order";
 
 const customerRouter = Router();
 
-customerRouter.get('/profile', function (req, res) {
-        const custId = req.query.custId;
-        try {
-            if (!custId) {
-                res.sendStatus(500)
-            }
-            const custRes = CustomerModel.findById(custId)
-            res.send(custRes);
-        } catch (err) {
-            console.log(err);
-            res.status(500).send(err);
-        }
+customerRouter.post('/create', [], async function (req: Request, res: Response) {
+    if (!req.body) {
+        res.sendStatus(500);
+        return;
     }
-)
-
-
-customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
     try {
-        const customer = CustomerModel.findById(req.query.custId);
-        if (customer == null) {
-            res.status(500).send("no customer found");
-        }
-        const orderData: OrderInterface = JSON.parse(req.body);
-        const orderStore = new OrderModel(orderData);
-        await orderStore.save()
+        const customerData: CustomerInterface = new CustomerModel(req.body);
+        const customerStore = new CustomerModel(customerData);
+        const custRes = await customerStore.save();
+        res.send(custRes);
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
-    res.send("success")
+});
+
+customerRouter.get('/profile', async function (req, res) {
+    const custId = req.query.custId;
+    if (!custId) {
+        res.sendStatus(500);
+        return;
+    }
+    try {
+        const custRes = await CustomerModel.findById(custId).exec();
+        res.send(custRes);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
 })
 
-customerRouter.post('/order', function (req, res, next) {
+
+customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
+    const custId = req.query.custId;
+    if (!custId || !req.body) {
+        res.sendStatus(500);
+        return;
+    }
     try {
-        const customer = CustomerModel.findById(req.query.custId);
-        const orderData: OrderInterface = JSON.parse(req.body);
-        if (customer == null) {
+        const customer = await CustomerModel.findById(custId).exec();
+        if (!customer) {
+            res.status(500).send("no customer found");
+        }
+        const orderData: OrderInterface = new OrderModel(req.body);
+        const orderStore = new OrderModel(orderData);
+        await orderStore.save();
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+    res.send("success");
+})
+
+customerRouter.post('/order', async function (req, res) {
+    const custId = req.query.custId;
+    if (!custId || !req.body) {
+        res.sendStatus(500);
+        return;
+    }
+    try {
+        const customer = await CustomerModel.findById(custId).exec();
+        const orderData: OrderInterface = new OrderModel(req.body);
+        if (!customer) {
             res.status(500).send("no customer found");
         }
         orderData.tax = 0.1;
         orderData.deliveryFee = 5;
         orderData.serviceFee = 0.4;
-        orderData.rating = 0.3
-        res.send(orderData)
+        orderData.rating = 0.3;
+        res.send(orderData);
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
-
-
-})
+});
 
 export default customerRouter
