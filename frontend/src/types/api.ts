@@ -9,6 +9,7 @@ export interface CustomerInterface extends Document {
 }
 
 export interface DonutInterface extends Document {
+    id: string
     name: string
     price: number
     weight: number
@@ -27,6 +28,7 @@ export interface EmployeeInterface extends Document {
 }
 
 export interface OrderInterface extends Document {
+    id: string
     amounts: Array<number>
     status: string
     tax: number
