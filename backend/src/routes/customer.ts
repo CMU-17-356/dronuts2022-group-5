@@ -7,7 +7,7 @@ const customerRouter = Router();
 
 customerRouter.post('/create', [], async function (req: Request, res: Response) {
     if (!req.body) {
-        res.sendStatus(500);
+        res.status(400).send('Body missing');
         return;
     }
     try {
@@ -24,7 +24,7 @@ customerRouter.post('/create', [], async function (req: Request, res: Response) 
 customerRouter.get('/profile', async function (req, res) {
     const custId = req.query.custId;
     if (!custId) {
-        res.sendStatus(500);
+        res.status(400).send('Param custId missing');
         return;
     }
     try {
@@ -39,36 +39,44 @@ customerRouter.get('/profile', async function (req, res) {
 
 customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
     const custId = req.query.custId;
-    if (!custId || !req.body) {
-        res.sendStatus(500);
+    if (!custId) {
+        res.status(400).send('Param custId missing');
+        return;
+    }
+    if (!req.body) {
+        res.status(400).send('Body missing');
         return;
     }
     try {
         const customer = await CustomerModel.findById(custId).exec();
         if (!customer) {
-            res.status(500).send("no customer found");
+            res.status(404).send("Customer not found");
         }
         const orderData: OrderInterface = new OrderModel(req.body);
         const orderStore = new OrderModel(orderData);
         await orderStore.save();
+        res.send(orderStore);
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
     }
-    res.send("success");
 })
 
 customerRouter.post('/order', async function (req, res) {
     const custId = req.query.custId;
-    if (!custId || !req.body) {
-        res.sendStatus(500);
+    if (!custId) {
+        res.status(400).send('Param custId missing');
+        return;
+    }
+    if (!req.body) {
+        res.status(400).send('Body missing');
         return;
     }
     try {
         const customer = await CustomerModel.findById(custId).exec();
         const orderData: OrderInterface = new OrderModel(req.body);
         if (!customer) {
-            res.status(500).send("no customer found");
+            res.status(404).send("Customer not found");
         }
         orderData.tax = 0.1;
         orderData.deliveryFee = 5;
