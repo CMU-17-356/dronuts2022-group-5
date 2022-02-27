@@ -40,7 +40,10 @@ export const Confirmation: React.FC = () => {
             const custId = order['customer'];
 
             try {
-                const orderres = await postRequest<OrderInterface>(order, `order?custId=${custId}`, null);
+                const orderRes = await postRequest<OrderInterface>(order, `order?custId=${custId}`, null);
+                if (orderRes.status === 200) {
+                    console.log("success")
+                }
             } catch (error) {
                 console.log(error);
             }
