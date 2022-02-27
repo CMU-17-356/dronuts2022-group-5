@@ -53,6 +53,7 @@ const customerSchema: Schema = new Schema({
 
 customerSchema.methods.toJSON = function () {
     return {
+        id: this._id,
         username: this.username,
         password: this.password,
         phoneNumber: this.phoneNumber,
