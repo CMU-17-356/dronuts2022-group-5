@@ -57,21 +57,21 @@ export const Confirmation: React.FC = () => {
                 <h1 className="div-Text">Confirmation</h1>
                 <div className="list-Items">
                     <ListItem key = {1} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {1} size = {4} name = {"Subtotal"} price = {12.84}/>
+                    <ListItem key = {2} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
+                    <ListItem key = {3} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
+                    <ListItem key = {4} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
+                    <ListItem key = {5} size = {4} name = {"Subtotal"} price = {12.84}/>
                 </div>
             </div>
 
             <div className="payment-Div">
                 <h1 className="div-Text">Payment</h1>
                 <div className="list-Items">
-                    <ListItem key = {1} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {1} size = {3} name = {"Subtotal"} price = {3.21}/>
+                    <ListItem key = {6} size = {3} name = {"Subtotal"} price = {3.21}/>
+                    <ListItem key = {7} size = {3} name = {"Subtotal"} price = {3.21}/>
+                    <ListItem key = {8} size = {3} name = {"Subtotal"} price = {3.21}/>
+                    <ListItem key = {9} size = {3} name = {"Subtotal"} price = {3.21}/>
+                    <ListItem key = {10} size = {3} name = {"Subtotal"} price = {3.21}/>
 
                 </div>
             </div>
@@ -79,10 +79,10 @@ export const Confirmation: React.FC = () => {
             <div className="contact-Div">
                 <h1 className="div-Text">Contact</h1>
                 <div className="list-Items">
-                    <ListInfo key = {2} title = {"Address"} content = {"hello?"}/>
-                    <ListInfo key = {2} title = {"Email"} content = {"hello?"}/>
-                    <ListInfo key = {2} title = {"Payment"} content = {"hello?"}/>
-                    <ListInfo key = {2} title = {"Number"} content = {"hello?"}/>
+                    <ListInfo key = {11} title = {"Address"} content = {"hello?"}/>
+                    <ListInfo key = {12} title = {"Email"} content = {"hello?"}/>
+                    <ListInfo key = {13} title = {"Payment"} content = {"hello?"}/>
+                    <ListInfo key = {14} title = {"Number"} content = {"hello?"}/>
                 </div>
             </div>
 
