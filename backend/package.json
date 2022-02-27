@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/CMU-17-356/dronuts2022-group-5#readme",
   "dependencies": {
+    "@types/cors": "^2.8.12",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",

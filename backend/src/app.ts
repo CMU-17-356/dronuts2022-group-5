@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 import config from '../config.json';
 import router from "./routes";
-
+import cors from 'cors';
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -14,6 +14,7 @@ app.use(jsonParser);
 app.use(router);
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }));
+app.use(cors);
 app.use(express.static(__dirname + '/public'));
 
 mongoose.connect(config.db, () => {

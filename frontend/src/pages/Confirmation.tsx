@@ -1,6 +1,5 @@
 import * as React from "react";
-import {Request, Response, Router} from "express";
-import {NavBar} from "../components/NavBar";
+import {NavBar} from "../components";
 import {ListItem} from "../components/ListItem";
 import {ListInfo} from "../components/ListInfo";
 import "../styles/Confirmation.css";
@@ -8,8 +7,8 @@ import {useEffect} from "react";
 import {getRequest, postRequest} from "../utils/requests";
 import {CustomerInterface, OrderInterface} from "../types/api";
 
+import {Link} from "react-router-dom";
 
-const customerRouter = Router();
 
 export const Confirmation: React.FC = () => {
     const customer = {
@@ -49,7 +48,7 @@ export const Confirmation: React.FC = () => {
             console.log(error);
         }
     }
-    // TODO: Get the input messages from the input text 
+
     return (<>
         <NavBar/>
         <div className="main-Confirmation-Div">
@@ -93,9 +92,10 @@ export const Confirmation: React.FC = () => {
                     <h1 className = "agreement-H1">By checking the box, you agree to our terms and services</h1>
                     <input className = "button-Div-Input" type="checkbox"></input>
                 </div>
-                <button className = "checkout-Button" onClick = {submitOrder}>
+
+                <Link className = "checkout-Button" onClick = {submitOrder} to="/status">
                     Make Payment
-                </button>
+                </Link>
             </div>
         </div>
     </>);

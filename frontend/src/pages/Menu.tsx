@@ -1,36 +1,47 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {DonutCard} from "../components/DonutCard";
 import {NavBar} from "../components/NavBar";
 import "../styles/Menu.css";
+import {getRequest} from "../utils/requests";
 
 class Donut {
     name: string
-    image: string
+    picture: string
     description: string
     price: number
     quantity: number
 
     constructor(name: string, image: string, description: string, price: number, quantity: number) {
         this.name = name;
-        this.image = image;
+        this.picture = image;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
     }
 }
 
-// Temporary Menu
-const items: Array<Donut> = [
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 2),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-    new Donut("Apple Krumble", "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/apple_krumb.jpg", "Apples and crumbs", 3.99, 0),
-]
 
 export const Menu: React.FC = () => {
+    const [menu, setMenu] = useState<Array<Donut>>([]);
+
+    async function getMenu() {
+        try {
+            const res = await getRequest<Array<Donut>>("donut/donuts", {});
+            if (res.status === 200) {
+                setMenu(res.data);
+            }
+            console.log(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+            getMenu();
+        },
+        [])
+
     return (<>
         <NavBar/>
         <div className="main-Div">
@@ -38,8 +49,9 @@ export const Menu: React.FC = () => {
             <div className="menu-Div">
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
-                    {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
+                    {menu.map((donut: Donut, index: number) => (
+                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                                   price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
@@ -47,8 +59,9 @@ export const Menu: React.FC = () => {
             <div className="menu-Div">
                 <h1 className="menu-Title">Freshly Baked</h1>
                 <div className="options-Div">
-                    {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
+                    {menu.map((donut: Donut, index: number) => (
+                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                                   price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
@@ -56,8 +69,9 @@ export const Menu: React.FC = () => {
             <div className="menu-Div">
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
-                    {items.map((donut: Donut, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.image} description={donut.description} price={donut.price} quantity={donut.quantity}/>
+                    {menu.map((donut: Donut, index: number) => (
+                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                                   price={donut.price} quantity={donut.quantity}/>
                     ))}
                 </div>
             </div>
