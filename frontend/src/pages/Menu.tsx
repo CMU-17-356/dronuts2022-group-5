@@ -24,10 +24,15 @@ class Donut {
 
 export const Menu: React.FC = () => {
     const [menu, setMenu] = useState<Array<Donut>>([]);
+    const headers = new Headers();
 
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    headers.append("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     async function getMenu() {
         try {
-            const res = await getRequest<Array<Donut>>("donut/donuts", {});
+            const res = await getRequest<Array<Donut>>("donut/donuts", headers);
             if (res.status === 200) {
                 setMenu(res.data);
             }

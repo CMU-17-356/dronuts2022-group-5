@@ -7,14 +7,20 @@ import router from "./routes";
 import cors from 'cors';
 
 const app = express();
+app.use(cors());
 const jsonParser = bodyParser.json();
 // const urlencoded = bodyParser.urlencoded({extended: false});
 app.use(jsonParser);
 
-app.use(router);
+
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }));
-app.use(cors);
+const corsOptions ={
+    origin:'*',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+}
+app.use(router);
 app.use(express.static(__dirname + '/public'));
 
 mongoose.connect(config.db, () => {
