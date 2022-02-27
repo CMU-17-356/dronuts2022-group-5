@@ -1,9 +1,25 @@
 import {Request, Response, Router} from "express";
 
-import {CustomerModel} from "../models/customer";
+import {CustomerInterface, CustomerModel} from "../models/customer";
 import {OrderInterface, OrderModel,} from "../models/order";
 
 const customerRouter = Router();
+
+customerRouter.post('/create', [], async function (req: Request, res: Response) {
+    if (!req.body) {
+        res.sendStatus(500);
+        return;
+    }
+    try {
+        const customerData: CustomerInterface = new CustomerModel(req.body);
+        const customerStore = new CustomerModel(customerData);
+        const custRes = await customerStore.save();
+        res.send(custRes);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
 
 customerRouter.get('/profile', async function (req, res) {
     const custId = req.query.custId;
