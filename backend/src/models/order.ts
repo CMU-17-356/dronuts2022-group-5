@@ -24,7 +24,7 @@ const orderSchema: Schema = new Schema({
     amounts: [Number],
     status: {
         type: String,
-        enum: ['IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
+        enum: ['UNCONFIRMED', 'IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
         default: 'IN-PROGRESS'
     }, 
     tax: Number,
