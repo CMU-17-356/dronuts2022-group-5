@@ -32,43 +32,26 @@ export class Order {
 }
 
 export const Employee: React.FC = () => {
-    // TODO: add confirmOrder to order buttons
-    async function confirmOrder(order: Order) {
-        alert("confirm order");
-        try {
-            const res = await postRequest<OrderInterface>(order, `employee/confirm?orderId=${order.id}`, null);
-            if (res.status == 200) {
-                console.log("success");
-            } else {
-                console.log(res);
-            }
-            // Refresh?
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    const [menu, setMenu] = React.useState<Array<Donut>>([]);
+    // Retrieves the menu from backend
     async function getMenu() {
         try {
             const res = await getRequest<Array<Donut>>("donut/donuts", {});
             if (res.status === 200) {
-                setMenu(res.data);
+                // Convert menu into dict (key is id, value is Donut)
+                const menuDict: { [key: string] : Donut } = {};
+                res.data.forEach(donut => {
+                    menuDict[donut.id] = donut;
+                });
+                setMenu(menuDict);
+            } else {
+                console.log(res);
             }
         } catch (error) {
             console.log(error);
         }
     }
-    React.useEffect(() => {
-            getMenu();
-    }, []);
 
-    const menuDict: { [key: string] : Donut } = {};
-    menu.forEach(donut => {
-        menuDict[donut.id] = donut;
-    });
-
-    const [orders, setOrders] = React.useState<Array<Order>>([]);
+    // Retrieves the in progress orders from backend
     async function getOrders() {
         try {
             const res = await getRequest<Array<Order>>("employee/orders", {});
@@ -79,49 +62,73 @@ export const Employee: React.FC = () => {
             console.log(err);
         }
     }
+
+    // Dismisses an order (sends a confirmation to the backend)
+    async function dismissOrder() {
+        try {
+            const orderId = orders[selectedOrder].id;
+            const res = await postRequest<OrderInterface>(null, `employee/confirm?orderId=${orderId}`, null);
+            if (res.status != 200) {
+                console.log(res);
+                return;
+            }
+            setOrders(orders.filter(order => order.id != orderId));
+            selectOrder(0);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    // States for menu, order, selected order
+    const [menu, setMenu] = React.useState<{ [key: string]: Donut}>({});
+    const [orders, setOrders] = React.useState<Array<Order>>([]);
+    const [selectedOrder, selectOrder] = React.useState<number>(1);
+
     React.useEffect(() => {
+        getMenu();
         getOrders();
     }, []);
-
-    let donuts: Array<string> = [];
-    let amounts: Array<number> = [];
-    if (orders.length > 0) {
-        donuts = orders[0].donuts;
-        amounts = orders[0].amounts;
-    }
 
     return (<>
         <div className="employee-Main-Div">
             <div className="list-orders-div">
                 <h1 className = "employee-main-div-title">Orders</h1>
                 {orders.map((order: Order, index: number) => (
-                    <OrderButton key={index} id={order.id}/>
+                    <OrderButton
+                        key={index}
+                        id={order.id}
+                        index={index}
+                        selectCb={selectOrder}
+                        dismissCb={dismissOrder}
+                    />
                 ))}
             </div>
 
             <div className="order-div">
-                <h1 className="order-Title">Order</h1>
+                <h1 className="order-Title">Order {orders[selectedOrder]?.id}</h1>
                 <div className="In-Progress-Div">
-                    <h1 className = "In-Progress-Title">In Progress</h1>
+                    <h1 className = "In-Progress-Title">Items</h1>
                     <div className="In-Progress">
-                        {donuts.map((donutId: string, index: number) => {
-                            const donut = menuDict[donutId];
-                            return <DonutCard
-                                key={index}
-                                name={donut.name}
-                                image={donut.picture}
-                                description={donut.description}
-                                price={donut.price}
-                                quantity={amounts[index]}
-                            />;
+                        {orders[selectedOrder]?.donuts.map((donutId: string, index: number) => {
+                            const donut = menu[donutId];
+                            if (donut) {
+                                return <DonutCard
+                                    key={index}
+                                    name={donut.name}
+                                    image={donut.picture}
+                                    description={donut.description}
+                                    price={donut.price}
+                                    quantity={orders[selectedOrder].amounts[index]}
+                                />;
+                            }
                         })}
                     </div>
                 </div>
-                <div className="Completed-Div">
+                {/* <div className="Completed-Div">
                     <h1 className = "Completed-Title">Completed</h1>
                     <div className="Completed">
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </>);

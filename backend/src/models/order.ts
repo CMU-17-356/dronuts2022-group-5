@@ -24,8 +24,13 @@ const orderSchema: Schema = new Schema({
     amounts: [Number],
     status: {
         type: String,
-        enum: ['UNCONFIRMED', 'IN-PROGRESS', 'IN-DELIVERY', 'COMPLETED'],
-        default: 'IN-PROGRESS'
+        enum: [
+            'UNCONFIRMED',  // entered in the system by customer, but not yet confirmed
+            'IN-PROGRESS',  // confirmed by customer
+            'IN-DELIVERY',  // confirmed and set out by employee
+            'COMPLETED'     // received by customer
+        ],
+        default: 'UNCONFIRMED'
     }, 
     tax: Number,
     serviceFee: Number,

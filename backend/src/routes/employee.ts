@@ -8,8 +8,8 @@ router.get('/orders', [], async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
     try {
         if (!orderId) {
-            // Return details of all orders that are not yet completed
-            const orders = await OrderModel.find().where('status').ne('COMPLETED').exec();
+            // Return details of all in progress orders
+            const orders = await OrderModel.find().where('status').equals('IN-PROGRESS').exec();
             res.send(orders);
         } else {
             // Specific order
