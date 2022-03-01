@@ -1,0 +1,95 @@
+.Shopping-Cart{
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    right: 0px;
+    z-index: 1000;
+    width: 30%;
+    top: 0px;
+    display: grid;
+    grid-template-rows: 10% 12.5% 67.5% 10%;
+}
+
+.title-SC{
+    border-bottom-width: 15px;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.total-SC{
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 100%;
+    align-items: center;
+    border-bottom-width: 5px; 
+}
+
+.guarantee-Total{
+    height: auto;
+    text-align: center;
+    padding: 0px;
+}
+
+.list-SC{
+    background-color: white;
+    overflow-y:scroll;
+}
+
+.confirmation-SC{
+    background-color: white;
+    border-top-width: 10px;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.list-item-SC{
+    display: grid;
+    border-bottom-width: 1px;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+
+}
+
+.guarantee-Image{
+    height: 30px;
+}
+
+.confirmation-Button{
+    margin: auto;
+    background-color: #EF72AC;
+    width: 50%;
+    height: 40px;
+    color: white;
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.list-img{
+    height: 50px;
+}
+
+.list-name{
+    font-size: 11px;
+    font-weight: bolder;
+}
+
+.list-calories{
+    font-size: 11px;
+    font-weight: bolder;
+}
+
+.list-button{
+    font-size: 11px;
+    font-weight: bolder;
+}
+
+.list-item-text{
+    border-width: 1px;
+    margin: 10px;
+    border-radius: 10px;
+}

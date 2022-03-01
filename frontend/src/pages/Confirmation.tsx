@@ -4,7 +4,7 @@ import {ListItem} from "../components/ListItem";
 import {ListInfo} from "../components/ListInfo";
 import "../styles/Confirmation.css";
 import {getRequest, postRequest} from "../utils/requests";
-import {CustomerInterface, OrderInterface} from "../types/api";
+import {OrderInterface} from "../types/api";
 
 import {Link} from "react-router-dom";
 import { Donut, Order } from "./Employee";
