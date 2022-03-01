@@ -12,7 +12,8 @@ class Donut {
     price: number
     quantity: number
 
-    constructor(name: string, image: string, description: string, price: number, quantity: number) {
+    constructor(id: string, name: string, image: string, description: string, price: number, quantity: number) {
+        this.id = id;
         this.name = name;
         this.image = image;
         this.description = description;
@@ -22,7 +23,7 @@ class Donut {
 }
 
 export const DonutCard: React.FC<Donut> = (donutIn: Donut) => {
-    const donut: Donut = new Donut(donutIn.name, donutIn.image, donutIn.description, donutIn.price, donutIn.quantity);
+    const donut: Donut = new Donut(donutIn.id, donutIn.name, donutIn.image, donutIn.description, donutIn.price, donutIn.quantity);
     const [quantity, setQuantity] = useState(donut.quantity);
 
     const headers = new Headers();
@@ -32,7 +33,11 @@ export const DonutCard: React.FC<Donut> = (donutIn: Donut) => {
     headers.append("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
 
-    useEffect(()=>{sentOrder(donut.id, quantity).then()}, [quantity])
+    useEffect(() => {
+        if (quantity != 0)
+            sentOrder(donut.id, quantity).then()
+    }, [quantity])
+
     async function sentOrder(donut: string, amount: number) {
         console.log("sendOrder")
         try {

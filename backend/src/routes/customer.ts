@@ -132,8 +132,9 @@ customerRouter.post('/order/update', async function (req, res) {
 
         const filter = { customer: customer?._id , status: "UNCONFIRMED"};
         //, { sort: { 'created_at' : -1 } }
-        let orderData = await OrderModel.findOne(filter).exec();
-        console.log(orderData)
+        let orders = await OrderModel.find(filter).sort('created_at').exec();
+        let orderData = orders[0];
+        console.log(orders)
         if (orderData == null){
             orderData = new OrderModel();
             orderData.customer = customer._id;
