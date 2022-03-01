@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {ShoppingCart} from "../components/ShoppingCart";
 
 export const NavBar: React.FC = () => {

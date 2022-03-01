@@ -1,6 +1,5 @@
 import * as React from "react";
 import "../styles/ShoppingCart.css";
-import {Confirmation} from "../pages/Confirmation";
 import {Link} from "react-router-dom";
 
 export const ShoppingCart: React.FC = () => {
