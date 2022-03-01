@@ -73,7 +73,7 @@ customerRouter.get('/order', async function (req, res) {
         const order = await OrderModel.
             findOne().
             where('customer').equals(custId).
-            sort({updated_at: -1}).
+            sort({createdAt: -1}).
             exec();
         res.send(order);        
     } catch (err) {
