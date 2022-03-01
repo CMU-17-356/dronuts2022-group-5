@@ -72,6 +72,7 @@ customerRouter.get('/order', async function (req, res) {
         const order = await OrderModel.
             findOne().
             where('customer').equals(custId).
+            where('status').equals('UNCONFIRMED').
             sort({createdAt: -1}).
             exec();
         res.send(order);        
