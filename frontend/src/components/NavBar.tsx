@@ -1,10 +1,13 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
-
+import {useEffect, useState} from "react";
+import {ShoppingCart} from "../components/ShoppingCart";
 
 export const NavBar: React.FC = () => {
+    const [toggle, setToggle] = useState(false);
+
     return (<>
-        <nav className={"w-full relative bg-pink-300  shadow-lg px-5 py-3"}>
+        <nav className={"w-full fixed top-0 bg-pink-300  shadow-lg px-5 py-3 fixed"}>
             <div className="w-full items-center justify-between">
                 <div className="flex w-full px-0 mx-5 justify-start">
                     <div
@@ -33,7 +36,8 @@ export const NavBar: React.FC = () => {
                             <Link
                                 className={
                                     "text-gray-800 hover:text-gray-600 px-3 py-0 flex items-center text-center text-sm uppercase font-bold"}
-                                to="/confirm">
+                                onClick={() => setToggle(!toggle)}
+                                to={""}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                                      viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -71,5 +75,8 @@ export const NavBar: React.FC = () => {
                 </div>
             </div>
         </nav>
+        {
+            toggle ? <ShoppingCart/>: <div></div> 
+        }
     </>);
 }
