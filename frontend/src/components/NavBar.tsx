@@ -7,7 +7,7 @@ export const NavBar: React.FC = () => {
     const [toggle, setToggle] = useState(false);
 
     return (<>
-        <nav className={"w-full fixed top-0 bg-pink-300  shadow-lg px-5 py-3 fixed"}>
+        <nav className={"sticky top-0 w-full bg-pink-300 shadow-lg px-5 py-3"}>
             <div className="w-full items-center justify-between">
                 <div className="flex w-full px-0 mx-5 justify-start">
                     <div

@@ -114,6 +114,7 @@ export const Employee: React.FC = () => {
                             if (donut) {
                                 return <DonutCard
                                     key={index}
+                                    id = {donut.id}
                                     name={donut.name}
                                     image={donut.picture}
                                     description={donut.description}

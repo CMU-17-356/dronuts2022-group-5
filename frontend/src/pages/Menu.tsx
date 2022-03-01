@@ -3,8 +3,8 @@ import {useEffect, useState} from "react";
 import {DonutCard} from "../components/DonutCard";
 import {NavBar} from "../components/NavBar";
 import "../styles/Menu.css";
-import {getRequest} from "../utils/requests";
-import {DonutInterface} from "../types/api";
+import {getRequest, postRequest} from "../utils/requests";
+import {DonutInterface, OrderInterface} from "../types/api";
 
 
 export const Menu: React.FC = () => {
@@ -40,7 +40,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                        <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
                                    price={donut.price} quantity={0}/>
                     ))}
                 </div>
@@ -50,7 +50,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Freshly Baked</h1>
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                        <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
                                    price={donut.price} quantity={0}/>
                     ))}
                 </div>
@@ -60,7 +60,7 @@ export const Menu: React.FC = () => {
                 <h1 className="menu-Title">Top Sellers</h1>
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
-                        <DonutCard key={index} name={donut.name} image={donut.picture} description={donut.description}
+                        <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
                                    price={donut.price} quantity={0}/>
                     ))}
                 </div>

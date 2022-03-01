@@ -3,6 +3,7 @@ import { send } from "process";
 
 import {CustomerInterface, CustomerModel} from "../models/customer";
 import {OrderModel} from "../models/order";
+import {Schema} from "mongoose";
 
 const customerRouter = Router();
 
@@ -111,5 +112,63 @@ customerRouter.post('/order', async function (req, res) {
         res.status(500).send(err);
     }
 });
+
+customerRouter.post('/order/update', async function (req, res) {
+    const custId = req.query.custId;
+    if (!custId) {
+        res.status(400).send('Param custId missing');
+        return;
+    }
+    if (!req.body) {
+        res.status(400).send('Body missing');
+        return;
+    }
+    try {
+        const customer = await CustomerModel.findById(custId).exec();
+        if (!customer) {
+            res.status(404).send("Customer not found");
+            return;
+        }
+
+        const filter = { customer: customer?._id , status: "UNCONFIRMED"};
+        //, { sort: { 'created_at' : -1 } }
+        let orderData = await OrderModel.findOne(filter).exec();
+        console.log(orderData)
+        if (orderData == null){
+            orderData = new OrderModel();
+            orderData.customer = customer._id;
+            orderData.status = 'UNCONFIRMED';
+            orderData.tax = 0.1;
+            orderData.serviceFee = 0.4;
+            orderData.donuts = new Array<Schema.Types.ObjectId>();
+            orderData.donuts.push(req.body.donut);
+            orderData.amounts.push(req.body.amounts);
+            orderData.deliveryFee = 5;
+            orderData.totalCost = 10;
+            await orderData.save();
+        }else{
+            let idx = -1;
+            for (let i = 0; i < orderData.donuts.length; i++){
+                if (orderData.donuts[i] == req.body.donut){
+                    idx = i;
+                    break;
+                }
+            }
+            if (idx != -1){
+                orderData.amounts[idx] = req.body.amounts;
+            }else{
+                orderData.donuts.push(req.body.donut);
+                orderData.amounts.push(req.body.amounts);
+            }
+            await OrderModel.updateOne({_id: orderData.id}, orderData)
+        }
+        console.log(orderData);
+        res.send(orderData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
+
 
 export default customerRouter
