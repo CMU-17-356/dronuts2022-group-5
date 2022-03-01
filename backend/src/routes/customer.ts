@@ -1,4 +1,5 @@
 import {Request, Response, Router} from "express";
+import { send } from "process";
 
 import {CustomerInterface, CustomerModel} from "../models/customer";
 import {OrderModel} from "../models/order";
@@ -60,6 +61,25 @@ customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
         res.status(500).send(err);
     }
 })
+
+customerRouter.get('/order', async function (req, res) {
+    const custId = req.query.custId;
+    if (!custId) {
+        res.status(400).send('Param custId missing');
+        return;
+    }
+    try {
+        const order = await OrderModel.
+            findOne().
+            where('customer').equals(custId).
+            sort({updated_at: -1}).
+            exec();
+        res.send(order);        
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
 
 customerRouter.post('/order', async function (req, res) {
     const custId = req.query.custId;

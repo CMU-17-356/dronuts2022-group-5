@@ -6,7 +6,7 @@ import { getRequest, postRequest } from "../utils/requests";
 import { OrderButton } from "../components/OrderButton";
 import { OrderInterface } from "../types/api";
 
-class Donut {
+export class Donut {
     id: string
     name: string
     price: number
@@ -82,7 +82,7 @@ export const Employee: React.FC = () => {
     // States for menu, order, selected order
     const [menu, setMenu] = React.useState<{ [key: string]: Donut}>({});
     const [orders, setOrders] = React.useState<Array<Order>>([]);
-    const [selectedOrder, selectOrder] = React.useState<number>(1);
+    const [selectedOrder, selectOrder] = React.useState<number>(0);
 
     React.useEffect(() => {
         getMenu();

@@ -3,89 +3,125 @@ import {NavBar} from "../components";
 import {ListItem} from "../components/ListItem";
 import {ListInfo} from "../components/ListInfo";
 import "../styles/Confirmation.css";
-import {useEffect} from "react";
 import {getRequest, postRequest} from "../utils/requests";
 import {CustomerInterface, OrderInterface} from "../types/api";
 
 import {Link} from "react-router-dom";
+import { Donut, Order } from "./Employee";
 
 
 export const Confirmation: React.FC = () => {
-    const customer = {
-        "username": "test",
-        "emailAddress": "test@test.com",
-        "phoneNumber": 4120000000
-    };
+    // Fixed custId for now
+    const custId = '621be978bd932c994c202f0c';
 
-    const order = {
-        "customer": "621be978bd932c994c202f0c",
-        "donuts": null,
-        "amounts": 4,
-        "status": 'IN-PROGRESS',
-        "tax": 1.50,
-        "serviceFee": 1.50,
-        "deliveryFee": 1.00,
-        "totalCost": 13.00,
-        "rating": 4.5
-    }
-    async function submitOrder() {
-        alert("submitOrder")
+    // Retrives the order from backend
+    async function getOrder() {
         try {
-            const custRes = await postRequest<CustomerInterface>(customer, "customer/create", null);
-            if (custRes.status === 200) {
-                console.log("success")
+            const res = await getRequest<Order>(`customer/order?custId=${custId}`, null);
+            if (res.status == 200) {
+                setOrder(res.data);
+            } else {
+                console.log(res);
             }
-            
-            // TODO: Get the custId
-            const custId = order['customer'];
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-            try {
-                const orderRes = await postRequest<OrderInterface>(order, `order?custId=${custId}`, null);
-                if (orderRes.status === 200) {
-                    console.log("success")
-                }
-            } catch (error) {
-                console.log(error);
+    // Retrieves menu from backend
+    async function getMenu() {
+        try {
+            const res = await getRequest<Array<Donut>>("donut/donuts", {});
+            if (res.status === 200) {
+                // Convert menu into dict (key is id, value is Donut)
+                const menuDict: { [key: string] : Donut } = {};
+                res.data.forEach(donut => {
+                    menuDict[donut.id] = donut;
+                });
+                setMenu(menuDict);
+            } else {
+                console.log(res);
             }
         } catch (error) {
             console.log(error);
         }
     }
 
+    // Submits order
+    async function submitOrder() {
+        try {
+            const orderRes = await postRequest<OrderInterface>(order, `customer/confirm?orderId=${order?.id}`, null);
+            if (orderRes.status === 200) {
+                console.log("success");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const [menu, setMenu] = React.useState<{[key: string]: Donut}>({});
+    const [order, setOrder] = React.useState<Order>();
+
+    React.useEffect(() => {
+        getMenu();
+        getOrder();
+    }, []);
+
+
+    let len = 0;
+    let numItems = 0;
+    let subTotal = 0;
+
+    if (order != null && Object.keys(menu).length != 0) {
+        len = order.donuts.length;
+        for (let i = 0; i < len; i++) {
+            numItems += order.amounts[i];
+            subTotal += menu[order.donuts[i]].price * order.amounts[i];
+        }
+    }
+
+    const serviceFee = order?.serviceFee ?? 0;
+    const deliveryFee = order?.deliveryFee ?? 0;
+    const tax = order?.tax ?? 0;
+    const total = subTotal + serviceFee + deliveryFee + tax;
+
     return (<>
         <NavBar/>
         <div className="main-Confirmation-Div">
-
             <div className="confirmation-Div">
                 <h1 className="div-Text">Confirmation</h1>
                 <div className="list-Items">
-                    <ListItem key = {1} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {2} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {3} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {4} size = {3} name = {"Blueberry Donuts"} price = {3.21}/>
-                    <ListItem key = {5} size = {4} name = {"Subtotal"} price = {12.84}/>
+                    {len != 0 ? order?.donuts.map((donutId: string, index: number) => {
+                        const donut = menu[donutId];
+                        return <ListItem
+                            key={index}
+                            size={order?.amounts[index]}
+                            name={donut.name}
+                            price={donut.price}
+                        />;
+                    }) : <></>}
+                    <ListItem key={len} size={numItems} name={"Subtotal"} price={subTotal}/>
                 </div>
             </div>
 
             <div className="payment-Div">
                 <h1 className="div-Text">Payment</h1>
                 <div className="list-Items">
-                    <ListItem key = {6} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {7} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {8} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {9} size = {3} name = {"Subtotal"} price = {3.21}/>
-                    <ListItem key = {10} size = {3} name = {"Subtotal"} price = {3.21}/>
-
+                    <ListItem key={len+1} size={0} name={"Subtotal"} price={subTotal}/>
+                    <ListItem key={len+2} size={0} name={"Tax"} price={tax}/>
+                    <ListItem key={len+3} size={0} name={"Service Fee"} price={serviceFee}/>
+                    <ListItem key={len+4} size={0} name={"Delivery Fee"} price={deliveryFee}/>
+                    <ListItem key={len+5} size={0} name={"Total"} price={total}/>
                 </div>
             </div>
 
             <div className="contact-Div">
                 <h1 className="div-Text">Contact</h1>
                 <div className="list-Items">
-                    <ListInfo key = {11} title = {"Address"} content = {"hello?"}/>
-                    <ListInfo key = {12} title = {"Email"} content = {"hello?"}/>
-                    <ListInfo key = {13} title = {"Payment"} content = {"hello?"}/>
-                    <ListInfo key = {14} title = {"Number"} content = {"hello?"}/>
+                    <ListInfo key={len+6} title={"Address"} content={"hello?"}/>
+                    <ListInfo key={len+7} title={"Email"} content={"hello?"}/>
+                    <ListInfo key={len+8} title={"Payment"} content={"hello?"}/>
+                    <ListInfo key={len+9} title={"Number"} content={"hello?"}/>
                 </div>
             </div>
 
@@ -96,7 +132,7 @@ export const Confirmation: React.FC = () => {
                     <input className = "button-Div-Input" type="checkbox"></input>
                 </div>
 
-                <Link className = "checkout-Button" onClick = {submitOrder} to="/status">
+                <Link className="checkout-Button" onClick={submitOrder} to="/status">
                     Make Payment
                 </Link>
             </div>
