@@ -11,6 +11,7 @@ class Donut {
     description: string
     price: number
     quantity: number
+    menuView: boolean
 
     constructor(id: string, name: string, image: string, description: string, price: number, quantity: number) {
         this.id = id;
@@ -32,14 +33,18 @@ export const DonutCard: React.FC<Donut> = (donutIn: Donut) => {
     headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     headers.append("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
-
-    useEffect(() => {
-        if (quantity != 0)
-            sentOrder(donut.id, quantity).then()
-    }, [quantity])
+    // Temporary fix for menu vs employee donut cards
+    if (donutIn.menuView) {
+        useEffect(() => {
+            if (quantity != 0)
+                sentOrder(donut.id, quantity).then()
+        }, [quantity])
+    } else {
+        if (quantity != donutIn.quantity)
+            setQuantity(donutIn.quantity);
+    }
 
     async function sentOrder(donut: string, amount: number) {
-        console.log("sendOrder")
         try {
             const res = await postRequest<OrderInterface>({
                 "donut": donut,

@@ -120,6 +120,7 @@ export const Employee: React.FC = () => {
                                     description={donut.description}
                                     price={donut.price}
                                     quantity={orders[selectedOrder].amounts[index]}
+                                    menuView={false}
                                 />;
                             }
                         })}

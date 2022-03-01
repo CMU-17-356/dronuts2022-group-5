@@ -41,7 +41,7 @@ export const Menu: React.FC = () => {
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
                         <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                                   price={donut.price} quantity={0}/>
+                                   price={donut.price} quantity={0} menuView={true}/>
                     ))}
                 </div>
             </div>
@@ -51,7 +51,7 @@ export const Menu: React.FC = () => {
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
                         <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                                   price={donut.price} quantity={0}/>
+                                   price={donut.price} quantity={0} menuView={true}/>
                     ))}
                 </div>
             </div>
@@ -61,7 +61,7 @@ export const Menu: React.FC = () => {
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
                         <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                                   price={donut.price} quantity={0}/>
+                                   price={donut.price} quantity={0} menuView={true}/>
                     ))}
                 </div>
             </div>
