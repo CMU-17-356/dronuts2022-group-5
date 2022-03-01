@@ -3,8 +3,8 @@ import {useEffect, useState} from "react";
 import {DonutCard} from "../components/DonutCard";
 import {NavBar} from "../components/NavBar";
 import "../styles/Menu.css";
-import {getRequest, postRequest} from "../utils/requests";
-import {DonutInterface, OrderInterface} from "../types/api";
+import {getRequest} from "../utils/requests";
+import {DonutInterface} from "../types/api";
 
 
 export const Menu: React.FC = () => {

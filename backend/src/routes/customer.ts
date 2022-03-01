@@ -1,5 +1,4 @@
 import {Request, Response, Router} from "express";
-import { send } from "process";
 
 import {CustomerInterface, CustomerModel} from "../models/customer";
 import {OrderModel} from "../models/order";
@@ -131,10 +130,8 @@ customerRouter.post('/order/update', async function (req, res) {
         }
 
         const filter = { customer: customer?._id , status: "UNCONFIRMED"};
-        //, { sort: { 'created_at' : -1 } }
-        let orders = await OrderModel.find(filter).sort('created_at').exec();
+        const orders = await OrderModel.find(filter).sort({createdAt: -1}).exec();
         let orderData = orders[0];
-        console.log(orders)
         if (orderData == null){
             orderData = new OrderModel();
             orderData.customer = customer._id;
@@ -163,7 +160,6 @@ customerRouter.post('/order/update', async function (req, res) {
             }
             await OrderModel.updateOne({_id: orderData.id}, orderData)
         }
-        console.log(orderData);
         res.send(orderData);
     } catch (err) {
         console.log(err);

@@ -9,7 +9,7 @@ router.get('/orders', [], async (req: Request, res: Response) => {
     try {
         if (!orderId) {
             // Return details of all in progress orders
-            const orders = await OrderModel.find().where('status').equals('IN-PROGRESS').exec();
+            const orders = await OrderModel.find().where('status').equals('IN-PROGRESS').sort({createdAt: -1}).exec();
             res.send(orders);
         } else {
             // Specific order
