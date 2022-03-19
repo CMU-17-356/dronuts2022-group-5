@@ -21,13 +21,83 @@
             "tags": []
         },
         {
-            "name": "Apple Krumb",
+            "name": "Blueberry",
             "price": 3.99,
             "weight": 10,
             "discount": 0,
             "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/blueberry.jpg",
             "description": "Blueberry donut",
             "availability": false,
+            "tags": []
+        },
+        {
+            "name": "Boston Cream",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/boston_kreme.jpg",
+            "description": "Boston Cream",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Chocolate Frosted",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/chocolate_frosted.jpg",
+            "description": "Chocolate Frosted",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Chocolate Glaze",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/chocolate_glaze.jpg",
+            "description": "Chocolate Glaze",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Chocolate Kreme",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/chocolate_kreme.jpg",
+            "description": "Chocolate Kreme",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Cinnamon Sugar",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/cinnamon_sugar.jpg",
+            "description": "Cinnamon Sugar",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Boston Cream",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/boston_kreme.jpg",
+            "description": "Boston Cream",
+            "availability": true,
+            "tags": []
+        },
+        {
+            "name": "Coconut",
+            "price": 3.99,
+            "weight": 10,
+            "discount": 0,
+            "picture": "https://cmu-17-356.github.io/Dronuts/assets/donut_flavors/coconut.jpg",
+            "description": "Coconut",
+            "availability": true,
             "tags": []
         }
     ]

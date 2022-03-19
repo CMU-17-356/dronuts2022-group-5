@@ -1,38 +1,20 @@
 import express, { Request, Response } from 'express';
 
-import { CustomerModel } from '../models/customer';
-import { DonutModel } from '../models/donut';
 import { OrderModel } from '../models/order';
 
 const router = express.Router();
-
-router.get('/test', [], async (req: Request, res: Response) => {
-    // Temporary way of adding orders
-    try {
-        const donut = await DonutModel.findOne();
-        const customer = new CustomerModel({username: 'testcustomer', password: 'testpassword'});
-        await customer.save();
-        const order = new OrderModel({customer: customer, donuts: [donut], tax: 1});
-        await order.save();
-    } catch (err) {
-        console.log(err);
-        res.status(500).send(err);
-        return;
-    }
-    res.send('success');
-});
 
 router.get('/orders', [], async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
     try {
         if (!orderId) {
-            // Return details of all orders that are not yet completed
-            const orders = await OrderModel.find().where('status').ne('COMPLETED').exec();
+            // Return details of all in progress orders
+            const orders = await OrderModel.find().where('status').equals('IN-PROGRESS').sort({createdAt: -1}).exec();
             res.send(orders);
         } else {
             // Specific order
-            const order = await OrderModel.findOne().where('_id').equals(orderId).exec();
-            if (!order) res.sendStatus(404);
+            const order = await OrderModel.findById(orderId).exec();
+            if (!order) res.sendStatus(404).send('Order not found');
             else res.send(order);
         }
     } catch (err) {
@@ -44,8 +26,7 @@ router.get('/orders', [], async (req: Request, res: Response) => {
 router.post('/confirm', async (req: Request, res: Response) => {
     const orderId = req.query.orderId;
     if (!orderId) {
-        // Missing orderId
-        res.sendStatus(400);
+        res.status(400).send('Param orderId missing');
         return;
     }
 
@@ -54,7 +35,8 @@ router.post('/confirm', async (req: Request, res: Response) => {
         // Change existing order to IN-DELIVERY
         const order = await OrderModel.findOneAndUpdate(
             {_id: orderId},
-            {status: 'IN-DELIVERY'}
+            {status: 'IN-DELIVERY'},
+            {new: true},
         );
         res.send(order);
     } catch (err) {

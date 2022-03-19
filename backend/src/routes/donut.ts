@@ -13,7 +13,7 @@ donutRouter.get('/donuts', [], async (req: Request, res: Response) => {
         } else {
             // Specific donut
             const order = await DonutModel.findOne().where('_id').equals(donutId).exec();
-            if (!order) res.sendStatus(404);
+            if (!order) res.status(404).send("Donut not found");
             else res.send(order);
         }
     } catch (err) {

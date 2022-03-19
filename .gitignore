@@ -164,3 +164,5 @@ dist
 backend/src/**/*.js
 backend/scripts/**/*.js
 backend/test/**/*.js
+backend/config.json
+
