@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import "../styles/MenuEdit.css"
 import { NavBar } from "../components/NavBar";
 import { DonutInterface } from "../types/api";
-import { getRequest } from "../utils/requests";
-import { DonutEdit } from "../components/DonutEdit";
+import { getRequest, postRequest } from "../utils/requests";
+import { DonutModel, DonutEdit } from "../components/DonutEdit";
 
 export const MenuEdit: React.FC = () => {
     const [menu, setMenu] = useState<Array<DonutInterface>>([]);
@@ -15,6 +15,7 @@ export const MenuEdit: React.FC = () => {
     headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     headers.append("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
+    // Retrieves the menu from backend
     async function getMenu() {
         try {
             const res = await getRequest<Array<DonutInterface>>("donut/donuts", headers);
@@ -24,6 +25,22 @@ export const MenuEdit: React.FC = () => {
             console.log(res.data)
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    // Submits the update POST request to backend
+    async function submitUpdate(donutId: string, donutInfo: DonutModel) {
+        try {
+            const res = await postRequest<null>(donutInfo, `donut/update?donutId=${donutId}`, null);
+            if (res.status != 200) {
+                console.log(res);
+                alert("A server error occured, please check the fields.")
+                return;
+            }
+            alert("Update successful!");
+        } catch (err) {
+            console.log(err);
+            alert("An error occurred, please check the fields.");
         }
     }
 
@@ -43,10 +60,10 @@ export const MenuEdit: React.FC = () => {
                     <th className="donuts-Header">Description</th>
                     <th className="donuts-Header">Price</th>
                 </tr>
-                {menu.map((donut: DonutInterface, index: number) => (
-                    <DonutEdit key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                            price={donut.price}/>
-                ))}
+                {menu.map((donut: DonutInterface, index: number) => {
+                    const donutModel = new DonutModel(donut.id, donut.name, donut.picture, donut.description, donut.price);
+                    return <DonutEdit key={index} donutModel={donutModel} submitCb={submitUpdate}/>
+                })}
             </table>
         </div>
     </>);
