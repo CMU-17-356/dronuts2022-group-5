@@ -1,39 +1,46 @@
 import * as React from "react";
 import "../styles/MenuEdit.css"
 
-class Donut {
+export class DonutModel {
     id: string
     name: string
-    image: string
+    picture: string
     description: string
     price: number
 
     constructor(id: string, name: string, image: string, description: string, price: number) {
         this.id = id;
         this.name = name;
-        this.image = image;
+        this.picture = image;
         this.description = description;
         this.price = price;
     }
 }
 
-export const DonutEdit: React.FC<Donut> = (donutIn: Donut) => {
-    const donut: Donut = new Donut(donutIn.id, donutIn.name, donutIn.image, donutIn.description, donutIn.price);
+class Donut {
+    donutModel: DonutModel
+    submitCb: (arg0: string, arg2: DonutModel) => Promise<void> // Function to submit update
+}
+
+export const DonutEdit: React.FC<Donut> = (donut: Donut) => {
+    const [imageText, setImageText] = React.useState(donut.donutModel.picture);
+    const [nameText, setNameText] = React.useState(donut.donutModel.name);
+    const [descriptionText, setDescriptionText] = React.useState(donut.donutModel.description);
+    const [priceText, setPriceText] = React.useState(donut.donutModel.price);
+
+    async function submit() {
+        const donutModel = new DonutModel(donut.donutModel.id, nameText, imageText, descriptionText, priceText);
+        donut.submitCb(donut.donutModel.id, donutModel);
+    }
 
     return (
         <tr className="donutEdit-Row">
-            <td width="10%"><img className="donutEdit-Img" src={donut.image}/></td>
-            <td><textarea className="donutEdit-LongText">{donut.image}</textarea></td>
-            <td><textarea className="donutEdit-Text">{donut.name}</textarea></td>
-            <td><textarea className="donutEdit-LongText">{donut.description}</textarea></td>
-            <td><textarea className="donutEdit-Text">{donut.price}</textarea></td>
-            <td><button className="donutEdit-Button">Update</button></td>
+            <td width="10%"><img className="donutEdit-Img" src={imageText}/></td>
+            <td><textarea className="donutEdit-Text" value={imageText} onChange={e => setImageText(e.target.value)}/></td>
+            <td><textarea className="donutEdit-Text" value={nameText} onChange={e => setNameText(e.target.value)}/></td>
+            <td><textarea className="donutEdit-Text" value={descriptionText} onChange={e => setDescriptionText(e.target.value)}/></td>
+            <td><textarea className="donutEdit-Text" value={priceText} onChange={e => setPriceText(Number(e.target.value))}/></td>
+            <td><button className="donutEdit-Button" onClick={submit}>Update</button></td>
         </tr>
-        // <div className="donuts-Row">
-        //     <img className="donuts-Img" src={donut.image}></img>
-        //     <h1 className="donuts-Text">{donut.name}</h1>
-        //     <h1 className="donuts-Description">{donut.description}</h1>
-        //     <h1 className="donuts-Description">${donut.price}</h1>
-        // </div>
     );
 }

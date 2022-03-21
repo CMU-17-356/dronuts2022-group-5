@@ -8,11 +8,6 @@
     margin-bottom: 20px;
 }
 
-.donuts-Table{
-    /* table-layout: fixed;
-    width: 100%; */
-}
-
 .donuts-Header{
     text-align: left;
 }
@@ -41,23 +36,10 @@ td {
     bottom: 0;
 }
 
-.donutEdit-LongText{
-    text-align: left;
-    width: 100%;
-    height: 100%;
-    padding: 0px 10px;
-    position: absolute;
-    margin: 0px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
 .donutEdit-Button{
     width: 90%;
     margin: auto;
-    /* margin-left: 10px; */
+    margin-left: 10px;
     background-color: #EF72AC;
     border-radius: 10px;
     height: 50px;

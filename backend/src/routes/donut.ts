@@ -33,7 +33,11 @@ donutRouter.post('/update', [], async (req: Request, res: Response) => {
         return;
     }
     try {
-        const donut = await DonutModel.updateOne({_id: donutId}, req.body);
+        const donut = await DonutModel.findByIdAndUpdate(
+            {_id: donutId},
+            req.body,
+            {new: true}
+        );
         res.send(donut);
     } catch (err) {
         console.log(err);
