@@ -37,27 +37,7 @@ export const Menu: React.FC = () => {
         <div className="main-Div">
 
             <div className="menu-Div">
-                <h1 className="menu-Title">Top Sellers</h1>
-                <div className="options-Div">
-                    {menu.map((donut: DonutInterface, index: number) => (
-                        <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                                   price={donut.price} quantity={0} menuView={true}/>
-                    ))}
-                </div>
-            </div>
-
-            <div className="menu-Div">
-                <h1 className="menu-Title">Freshly Baked</h1>
-                <div className="options-Div">
-                    {menu.map((donut: DonutInterface, index: number) => (
-                        <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
-                                   price={donut.price} quantity={0} menuView={true}/>
-                    ))}
-                </div>
-            </div>
-
-            <div className="menu-Div">
-                <h1 className="menu-Title">Top Sellers</h1>
+                <h1 className="menu-Title">Menu</h1>
                 <div className="options-Div">
                     {menu.map((donut: DonutInterface, index: number) => (
                         <DonutCard key={index} id={donut.id} name={donut.name} image={donut.picture} description={donut.description}
