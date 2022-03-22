@@ -64,9 +64,8 @@ export const Employee: React.FC = () => {
     }
 
     // Dismisses an order (sends a confirmation to the backend)
-    async function dismissOrder() {
+    async function dismissOrder(orderId: string) {
         try {
-            const orderId = orders[selectedOrder].id;
             const res = await postRequest<OrderInterface>(null, `employee/confirm?orderId=${orderId}`, null);
             if (res.status != 200) {
                 console.log(res);
