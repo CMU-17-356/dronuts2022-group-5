@@ -22,4 +22,27 @@ donutRouter.get('/donuts', [], async (req: Request, res: Response) => {
     }
 });
 
+donutRouter.post('/update', [], async (req: Request, res: Response) => {
+    const donutId = req.query.donutId;
+    if (!donutId) {
+        res.status(400).send('Param donutId missing');
+        return;
+    }
+    if (!req.body) {
+        res.status(400).send('Body missing');
+        return;
+    }
+    try {
+        const donut = await DonutModel.findByIdAndUpdate(
+            {_id: donutId},
+            req.body,
+            {new: true}
+        );
+        res.send(donut);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
+
 export default donutRouter

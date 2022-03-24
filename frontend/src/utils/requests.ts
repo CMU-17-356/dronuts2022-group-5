@@ -1,7 +1,7 @@
 import axios from 'axios';
 
+// const BASE_URL = 'http://34.133.126.120/';
 const BASE_URL = 'http://localhost:3000/';
-
 export function postRequest<T>(data: any | null, suffix: string, header: any | null) {
     console.log("post: " + BASE_URL + suffix)
     return axios.request<T>({

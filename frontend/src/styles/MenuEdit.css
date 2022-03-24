@@ -1,0 +1,53 @@
+.main-Div{
+    padding: 50px;
+}
+
+.main-Title{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.donuts-Header{
+    text-align: left;
+}
+
+.donutEdit-Row{
+    padding: 0px;
+    margin: 0px;
+    border-width: 0.5px;
+    border-color: #838383;
+    align-items: left;
+}
+
+.donutEdit-Text{
+    text-align: left;
+    width: 100%;
+    height: 95px;
+    padding: 0px 10px;
+    margin: 0px;
+    resize: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.donutEdit-Button{
+    width: 100%;
+    margin: auto;
+    background-color: #EF72AC;
+    border-radius: 10px;
+    height: 50px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.donutEdit-LongTd{
+    width: 25%;
+}
+
+.donutEdit-SmallTd{
+    width: 10%;
+}

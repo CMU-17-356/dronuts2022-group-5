@@ -64,9 +64,8 @@ export const Employee: React.FC = () => {
     }
 
     // Dismisses an order (sends a confirmation to the backend)
-    async function dismissOrder() {
+    async function dismissOrder(orderId: string) {
         try {
-            const orderId = orders[selectedOrder].id;
             const res = await postRequest<OrderInterface>(null, `employee/confirm?orderId=${orderId}`, null);
             if (res.status != 200) {
                 console.log(res);
@@ -89,6 +88,14 @@ export const Employee: React.FC = () => {
         getOrders();
     }, []);
 
+    let totalWeight = 0;
+    // Get total weight
+    if (Object.keys(menu).length != 0) {
+        orders[selectedOrder]?.donuts.map((donutId: string, index: number) => {
+            totalWeight += menu[donutId].weight * orders[selectedOrder].amounts[index];
+        });
+    }
+
     return (<>
         <div className="employee-Main-Div">
             <div className="list-orders-div">
@@ -108,6 +115,7 @@ export const Employee: React.FC = () => {
                 <h1 className="order-Title">Order {orders[selectedOrder]?.id}</h1>
                 <div className="In-Progress-Div">
                     <h1 className = "In-Progress-Title">Items</h1>
+                    Confirm Total Weight: {totalWeight}g
                     <div className="In-Progress">
                         {orders[selectedOrder]?.donuts.map((donutId: string, index: number) => {
                             const donut = menu[donutId];

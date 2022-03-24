@@ -54,7 +54,8 @@ customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
             {_id: orderId},
             {status: 'IN-PROGRESS'},
             {new: true},
-        );
+        )
+        OrderModel.deleteMany({status: 'UNCONFIRMED'});
         res.send(orderStore);
     } catch (err) {
         console.log(err);
@@ -62,20 +63,20 @@ customerRouter.post('/confirm', [], async (req: Request, res: Response) => {
     }
 })
 
-customerRouter.get('/order', async function (req, res) {
+customerRouter.get('/unconfirm', async function (req, res) {
     const custId = req.query.custId;
     if (!custId) {
         res.status(400).send('Param custId missing');
         return;
     }
     try {
-        const order = await OrderModel.
-            findOne().
+        const orders = await OrderModel.
+            find().
             where('customer').equals(custId).
             where('status').equals('UNCONFIRMED').
-            sort({createdAt: -1}).
             exec();
-        res.send(order);        
+        console.log(orders)
+        res.send(orders[orders.length - 1]);
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
