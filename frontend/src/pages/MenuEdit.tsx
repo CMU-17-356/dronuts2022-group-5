@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "../styles/MenuEdit.css"
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../components";
 import { DonutInterface } from "../types/api";
 import { getRequest, postRequest } from "../utils/requests";
 import { DonutModel, DonutEdit } from "../components/DonutEdit";

@@ -13,11 +13,14 @@ import { Donut, Order } from "./Employee";
 export const Confirmation: React.FC = () => {
     // Fixed custId for now
     const custId = '621be978bd932c994c202f0c';
+    const [menu, setMenu] = React.useState<{[key: string]: Donut}>({});
+    const [order, setOrder] = React.useState<Order>();
 
     // Retrives the order from backend
     async function getOrder() {
         try {
-            const res = await getRequest<Order>(`customer/order?custId=${custId}`, null);
+            console.log("call get Order")
+            const res = await getRequest<Order>(`customer/unconfirm?custId=${custId}`, null);
             if (res.status == 200) {
                 setOrder(res.data);
             } else {
@@ -58,9 +61,6 @@ export const Confirmation: React.FC = () => {
             console.log(error);
         }
     }
-
-    const [menu, setMenu] = React.useState<{[key: string]: Donut}>({});
-    const [order, setOrder] = React.useState<Order>();
 
     React.useEffect(() => {
         getMenu();
