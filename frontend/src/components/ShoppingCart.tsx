@@ -50,13 +50,11 @@ export const ShoppingCart: React.FC = () => {
     }, []);
 
     let len = 0;
-    let numItems = 0;
     let subTotal = 0;
 
     if (order != null && order.donuts != null && Object.keys(menu).length != 0) {
         len = order.donuts.length;
         for (let i = 0; i < len; i++) {
-            numItems += order.amounts[i];
             subTotal += menu[order.donuts[i]].price * order.amounts[i];
         }
     }
@@ -97,7 +95,7 @@ export const ShoppingCart: React.FC = () => {
                     })}
                 </div>
                 <div className="confirmation-SC">
-                    <Link className="confirmation-Button" to="/confirm">Checkout $5.97</Link>
+                    <Link className="confirmation-Button" to="/confirm">Checkout ${subTotal}</Link>
                 </div>
             </div>
 
