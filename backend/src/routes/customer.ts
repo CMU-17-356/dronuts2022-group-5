@@ -148,9 +148,14 @@ customerRouter.post('/order/update', async function (req, res) {
         }else{
             let idx = -1;
             for (let i = 0; i < orderData.donuts.length; i++){
+
                 if (orderData.donuts[i] == req.body.donut){
                     idx = i;
-                    break;
+                }
+                if (orderData.amounts[i] == 0){
+                    orderData.donuts.splice(i, 1);
+                    orderData.amounts.splice(i, 1);
+                    i--;
                 }
             }
             if (idx != -1){
