@@ -1,4 +1,4 @@
 {
     "port": 3000,
-    "db": "mongodb+srv://admin:uDF336ATnhshgWXG@cluster0.hjhgb.mongodb.net/dronuts?retryWrites=true&w=majority"
+    "db": "mongodb://127.0.0.1/dronuts"
 }
