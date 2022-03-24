@@ -4,6 +4,18 @@ import { CustomerInterface, CustomerModel } from '../src/models/customer';
 import { OrderInterface, OrderModel } from "../src/models/order";
 import { DonutInterface, DonutModel } from "../src/models/donut";
 
+beforeAll(async () => {
+    await testDB.connect();
+});
+
+afterEach(async () => {
+    await testDB.clearDatabase();
+});
+
+afterAll(async () => {
+    await testDB.closeDatabase();
+});
+
 // This test only could run when the database is connected. 
 describe('end-to-end tests', function () {
     // TODO: modify the test variables 
