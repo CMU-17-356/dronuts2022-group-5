@@ -53,17 +53,22 @@ export const MenuEdit: React.FC = () => {
         <div className="main-Div">
             <h1 className="main-Title">Edit Menu</h1>
             <table className="donuts-Table">
-                <tr>
-                    <th className="donuts-Header">Image</th>
-                    <th className="donuts-Header">Image URL</th>
-                    <th className="donuts-Header">Name</th>
-                    <th className="donuts-Header">Description</th>
-                    <th className="donuts-Header">Price</th>
-                </tr>
-                {menu.map((donut: DonutInterface, index: number) => {
-                    const donutModel = new DonutModel(donut.id, donut.name, donut.picture, donut.description, donut.price);
-                    return <DonutEdit key={index} donutModel={donutModel} submitCb={submitUpdate}/>
-                })}
+                <thead>
+                    <tr>
+                        <th className="donuts-Header">Image</th>
+                        <th className="donuts-Header">Image URL</th>
+                        <th className="donuts-Header">Name</th>
+                        <th className="donuts-Header">Description</th>
+                        <th className="donuts-Header">Price ($)</th>
+                        <th className="donuts-Header">Weight (g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {menu.map((donut: DonutInterface, index: number) => {
+                        const donutModel = new DonutModel(donut.id, donut.name, donut.picture, donut.description, donut.price, donut.weight);
+                        return <DonutEdit key={index} donutModel={donutModel} submitCb={submitUpdate}/>
+                    })}
+                </tbody>
             </table>
         </div>
     </>);

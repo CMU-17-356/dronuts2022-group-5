@@ -82,6 +82,7 @@
     height: 250px;
     padding: 30px;
     padding-top: 20px;
+    overflow-y: auto;
 }
 
 .list-Item{
