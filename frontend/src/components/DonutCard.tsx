@@ -36,7 +36,7 @@ export const DonutCard: React.FC<Donut> = (donutIn: Donut) => {
     // Temporary fix for menu vs employee donut cards
     if (donutIn.menuView) {
         useEffect(() => {
-            if (quantity != 0)
+            if (quantity >= 0)
                 sentOrder(donut.id, quantity).then()
         }, [quantity])
     } else {
