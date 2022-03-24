@@ -8,16 +8,17 @@ export const ShoppingCart: React.FC = () => {
         <div className = "Shopping-Cart">
             <div className = "title-SC">
                 <div className = "location-Title">
-                    <h1>Personal Cart</h1>
-                    <h1>Carnegie Mellon University</h1>
+                    <h1 className = "personal-Cart">Personal Cart</h1>
+                    <h1 className = "pc-Location">Carnegie Mellon University</h1>
                 </div>
                 <button className = "button-Title">
                     X Close
                 </button>
             </div>
             <div className = "total-SC">
+                <img className = "guarantee-Image" src={"image/Dronut.png"}></img>
                 <div className = "guarantee-Total">
-                    <img className = "guarantee-Image" src={"image/Dronut.png"}></img>
+                    <h1 className = "guarantee-Title">Dronuts</h1>
                     <h1 className = "guarantee-Time">By 1:21 pm</h1>
                     <h1 className = "guarantee-Desc">100% satisfaction guarantee</h1>
                 </div>
@@ -32,13 +33,15 @@ export const ShoppingCart: React.FC = () => {
                         <button className = "list-button">Remove</button>
                     </div>
                     <input className = "list-item-text" type="text" placeholder="3"></input>
-                    <h1>$5.97</h1>
+                    <h1 className = "sc-price">$5.97</h1>
                 </div>
 
 
             </div>
             <div className = "confirmation-SC">
-                <Link className = "confirmation-Button" to="/confirm">Checkout $5.97</Link>
+                <button className = "confirmation-Button">
+                    <Link className = "confirmation-Link" to="/confirm">Checkout $5.97</Link>
+                </button>
             </div>
         </div>
     </>

@@ -1,34 +1,57 @@
 .Shopping-Cart{
-    height: 100%;
+    height: 100vh;
     background-color: white;
-    position: absolute;
+    position: fixed;
     right: 0px;
     z-index: 1000;
-    width: 30%;
+    width: 525px;
     top: 0px;
     display: grid;
-    grid-template-rows: 10% 12.5% 67.5% 10%;
+    grid-template-rows: 11.25% 13.75% 63.75% 11.25%;
 }
 
 .title-SC{
-    border-bottom-width: 15px;
+    border-bottom-width: 10px;
+    border-color: rgb(247, 247, 247);
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 77.5% 22.5%;
     padding: 10px;
+    text-align: center;
 }
 
 .total-SC{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 30% auto auto;
     height: 100%;
     align-items: center;
-    border-bottom-width: 5px; 
+    border-bottom-width: 2px;
+    border-color: rgb(247, 247, 247);
 }
 
 .guarantee-Total{
     height: auto;
-    text-align: center;
+    text-align: left;
     padding: 0px;
+}
+
+.guarantee-Time{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: rgb(10, 173, 10);
+}
+
+.guarantee-Title{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(50, 50, 50);
+}
+
+.guarantee-Desc{
+    color: rgb(43, 120, 198);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 600;
 }
 
 .list-SC{
@@ -38,58 +61,112 @@
 
 .confirmation-SC{
     background-color: white;
-    border-top-width: 10px;
+    border-color: rgb(247, 247, 247);
+    border-top-width: 2px;
     display: grid;
     align-items: center;
     text-align: center;
+    grid-template-columns: auto;
 }
 
 .list-item-SC{
     display: grid;
     border-bottom-width: 1px;
-    grid-template-columns: 25% 25% 25% 25%;
-    padding: 10px;
+    grid-template-columns: 30% 30% 17.5% 22.5%;
     align-items: center;
-    text-align: center;
+    height: 75px;
 
 }
 
 .guarantee-Image{
     height: 30px;
+    text-align: center;
+    margin: auto;
 }
 
 .confirmation-Button{
     margin: auto;
+    width: 80%;
     background-color: #EF72AC;
-    width: 50%;
-    height: 40px;
     color: white;
     font-weight: bolder;
     font-size: 15px;
-    border-radius: 10px;
+    height: 70%;
+    border-radius: 5px;
 }
 
 .list-img{
     height: 50px;
+    margin: auto;
 }
 
 .list-name{
-    font-size: 11px;
-    font-weight: bolder;
+    color: rgb(50, 50, 50);
+    font-size: 14px;
+    font-weight: 200;
+    text-align: left;
 }
 
 .list-calories{
-    font-size: 11px;
-    font-weight: bolder;
+    color: rgb(50, 50, 50);
+    font-size: 10px;
+    font-weight: 200;
+    text-align: left;
 }
 
 .list-button{
-    font-size: 11px;
-    font-weight: bolder;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: left;
+    margin-right: auto;
 }
 
 .list-item-text{
     border-width: 1px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-align: center;
+    height: 60%;
+    width: 70%;
+}
+
+.personal-Cart{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(50, 50, 50);
+}
+
+.pc-Location{
+    color: rgb(117, 117, 117);
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.button-Title{
+    border-color: #EF72AC;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 90%;
+    width: 95%;
+    color: #EF72AC;
+}
+
+.price-Total{
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    width: 30%;
+    text-align: right;
+    margin-left: 30%;
+}
+
+.sc-price{
+    font-size: 14px;
+    color: rgb(66, 66, 66);
+    text-align: center;
+}
+
+.confirmation-Link{
+    width: 100%;
+    height: 100%;
 }
