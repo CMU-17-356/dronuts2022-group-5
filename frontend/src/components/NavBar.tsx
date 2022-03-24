@@ -76,7 +76,7 @@ export const NavBar: React.FC = () => {
             </div>
         </nav>
         {
-            toggle ? <ShoppingCart/>: <div></div> 
+            toggle ? <ShoppingCart closeCB = {setToggle}/>: <div></div> 
         }
     </>);
 }
