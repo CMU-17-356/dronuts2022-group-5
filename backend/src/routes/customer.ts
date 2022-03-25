@@ -75,7 +75,6 @@ customerRouter.get('/unconfirm', async function (req, res) {
             where('customer').equals(custId).
             where('status').equals('UNCONFIRMED').
             exec();
-        console.log(orders)
         res.send(orders[orders.length - 1]);
     } catch (err) {
         console.log(err);
@@ -149,16 +148,32 @@ customerRouter.post('/order/update', async function (req, res) {
         }else{
             let idx = -1;
             for (let i = 0; i < orderData.donuts.length; i++){
+
                 if (orderData.donuts[i] == req.body.donut){
                     idx = i;
-                    break;
+                }
+                if (orderData.amounts[i] == 0){
+                    orderData.donuts.splice(i, 1);
+                    orderData.amounts.splice(i, 1);
+                    i--;
                 }
             }
             if (idx != -1){
-                orderData.amounts[idx] = req.body.amounts;
+                if(req.body.amounts <= 0) {
+                    orderData.donuts.splice(idx, 1);
+                    orderData.amounts.splice(idx, 1);
+                }
+                else {
+                    orderData.amounts[idx] = req.body.amounts;
+                }
             }else{
-                orderData.donuts.push(req.body.donut);
-                orderData.amounts.push(req.body.amounts);
+                if(req.body.amounts == 0) {
+                    return 0;
+                }
+                else{
+                    orderData.donuts.push(req.body.donut);
+                    orderData.amounts.push(req.body.amounts);
+                }
             }
             await OrderModel.updateOne({_id: orderData.id}, orderData)
         }
@@ -169,5 +184,5 @@ customerRouter.post('/order/update', async function (req, res) {
     }
 });
 
-
 export default customerRouter
+
