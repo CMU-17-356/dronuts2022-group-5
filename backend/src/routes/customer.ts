@@ -168,7 +168,8 @@ customerRouter.post('/order/update', async function (req, res) {
                 }
             }else{
                 if(req.body.amounts == 0) {
-                    return 0;
+                    res.send(orderData);
+                    return;
                 }
                 else{
                     orderData.donuts.push(req.body.donut);
