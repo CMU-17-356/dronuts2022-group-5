@@ -1,13 +1,17 @@
 import * as React from "react";
 import "../styles/ShoppingCart.css";
 import {Link} from "react-router-dom";
+import { Donut, Order } from "../pages/Employee";
 import {getRequest} from "../utils/requests";
-import {Donut, Order} from "../pages/Employee";
 
-export const ShoppingCart: React.FC = () => {
+interface F{
+    closeCB: React.Dispatch<boolean>  // State dispatch to select order
+}
+
+export const ShoppingCart: React.FC<F> = (f:F) => {
     // Fixed custId for now
     const custId = '621be978bd932c994c202f0c';
-    const [menu, setMenu] = React.useState<{ [key: string]: Donut }>({});
+    const [menu, setMenu] = React.useState<{[key: string]: Donut}>({});
     const [order, setOrder] = React.useState<Order>();
 
     // Retrives the order from backend
@@ -31,7 +35,7 @@ export const ShoppingCart: React.FC = () => {
             const res = await getRequest<Array<Donut>>("donut/donuts", {});
             if (res.status === 200) {
                 // Convert menu into dict (key is id, value is Donut)
-                const menuDict: { [key: string]: Donut } = {};
+                const menuDict: { [key: string] : Donut } = {};
                 res.data.forEach(donut => {
                     menuDict[donut.id] = donut;
                 });
@@ -52,7 +56,7 @@ export const ShoppingCart: React.FC = () => {
     let len = 0;
     let subTotal = 0;
 
-    if (order != null && order.donuts != null && Object.keys(menu).length != 0) {
+    if (order != null && Object.keys(menu).length != 0) {
         len = order.donuts.length;
         for (let i = 0; i < len; i++) {
             subTotal += menu[order.donuts[i]].price * order.amounts[i];
@@ -60,45 +64,47 @@ export const ShoppingCart: React.FC = () => {
     }
 
     return (
-        <>
-            <div className="Shopping-Cart">
-                <div className="title-SC">
-                    <div className="location-Title">
-                        <h1>Personal Cart</h1>
-                        <h1>Carnegie Mellon University</h1>
-                    </div>
-                    <button className="button-Title">
-                        X Close
-                    </button>
+    <>
+        <div className = "Shopping-Cart">
+            <div className = "title-SC">
+                <div className = "location-Title">
+                    <h1 className = "personal-Cart">Personal Cart</h1>
+                    <h1 className = "pc-Location">Carnegie Mellon University</h1>
                 </div>
-                <div className="total-SC">
-                    <div className="guarantee-Total">
-                        <img className="guarantee-Image" src={"image/Dronut.png"}></img>
-                        <h1 className="guarantee-Time">By 1:21 pm</h1>
-                        <h1 className="guarantee-Desc">100% satisfaction guarantee</h1>
-                    </div>
-                    <h1 className="price-Total">$5.97</h1>
+                <button className = "button-Title" onClick={() => f.closeCB(false)}>
+                    X Close
+                </button>
+            </div>
+            <div className = "total-SC">
+                <img className = "guarantee-Image" src={"image/Dronut.png"}></img>
+                <div className = "guarantee-Total">
+                    <h1 className = "guarantee-Title">Dronuts</h1>
+                    <h1 className = "guarantee-Time">By 1:21 pm</h1>
+                    <h1 className = "guarantee-Desc">100% satisfaction guarantee</h1>
                 </div>
-                <div className="list-SC">
-                    {len != 0 && order?.donuts.map((donutId: string, index: number) => {
-                        const donut = menu[donutId];
-                        return <div key={index} className="list-item-SC">
-                            <img className="donuts-Img" src={donut.picture}/>
+                <h1 className = "price-Total">${subTotal}</h1>
+            </div>
+            <div className = "list-SC">
+                {len != 0 && order?.donuts.map((donutId: string, index: number) => {
+                    const donut = menu[donutId];
+                    return <div key={index} className = "list-item-SC">
+                            <img className = "list-img" src={donut.picture}></img>
                             <div>
                                 <h1 className="list-name">{donut.name}</h1>
                                 <h1 className="list-calories">300 Calories</h1>
-                                <button className="list-button">Remove</button>
+                                <button className = "list-button">Remove</button>
                             </div>
-                            <div>{order?.amounts[index]}</div>
-                            <h1>{order?.totalCost}</h1>
-                        </div>
-                    })}
-                </div>
-                <div className="confirmation-SC">
-                    <Link className="confirmation-Button" to="/confirm">Checkout ${subTotal}</Link>
-                </div>
+                            <h1 className = "sc-price">{order?.amounts[index]}</h1> 
+                            <h1 className = "sc-price">${donut.price * order?.amounts[index]}</h1>
+                            </div>
+                } )}
             </div>
-
-        </>
+            <div className = "confirmation-SC">
+                <button className = "confirmation-Button">
+                    <Link className = "confirmation-Link" to="/confirm">Checkout ${subTotal}</Link>
+                </button>
+            </div>
+        </div>
+    </>
     );
 }
