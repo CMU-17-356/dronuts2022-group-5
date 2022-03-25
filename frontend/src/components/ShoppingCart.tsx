@@ -2,8 +2,7 @@ import * as React from "react";
 import "../styles/ShoppingCart.css";
 import {Link} from "react-router-dom";
 import { Donut, Order } from "../pages/Employee";
-import {getRequest, postRequest} from "../utils/requests";
-import {OrderInterface} from "../types/api";
+import {getRequest} from "../utils/requests";
 
 interface F{
     closeCB: React.Dispatch<boolean>  // State dispatch to select order
